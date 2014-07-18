@@ -33,42 +33,41 @@ import edu.usc.softarch.arcade.util.FileUtil;
 public class Comparison {
 
 	public static void main(String[] args) throws IOException {
-		String src = "C:\\Users\\Duc\\Desktop\\Jack\\jackrabbit-core-1.6.5-0";
+		String src = args[2];
 		int topics = 175;
 		ArrayList<DocTopicItem> pDocTopicItems = DocTopics(src, topics, args[0]);
 		ArrayList<DocTopicItem> qDocTopicItems = DocTopics(src, topics, args[1]);
 		
 		System.out.println(pDocTopicItems.size());
 		System.out.println(qDocTopicItems.size());
-		
-		for (int i = 0; i <topics; i++){
-		DocTopicItem pDocTopicItem = pDocTopicItems.get(i);
-		DocTopicItem qDocTopicItem = qDocTopicItems.get(i);
-		
-		if (pDocTopicItem.topics.size() != qDocTopicItem.topics.size()) {
-//			logger.error("P size: " + pDocTopicItem.topics.size());
-//			logger.error("Q size: " + qDocTopicItem.topics.size());
-//			logger.error("P and Q for Jensen Shannon Divergence not the same size...exiting");
-//			System.exit(0);
-			System.out.println("not the same size");
-		}
-		
-		double[] sortedP = new double[pDocTopicItem.topics.size()];
-		double[] sortedQ = new double[qDocTopicItem.topics.size()];
-		
-		
-		for (TopicItem pTopicItem : pDocTopicItem.topics) {
-			sortedP[pTopicItem.topicNum] = pTopicItem.proportion;
-		}
-		
-		for (TopicItem qTopicItem : qDocTopicItem.topics) {
-			sortedQ[qTopicItem.topicNum] = qTopicItem.proportion;
-		}
-		
-		//divergence = jsDivergence(sortedP, sortedQ);
-		double divergence = Maths.jensenShannonDivergence(sortedP, sortedQ);
-		System.out.println(divergence);
-		//divergence = 0;
+
+		for (int i = 0; i < topics; i++) {
+			DocTopicItem pDocTopicItem = pDocTopicItems.get(i);
+			DocTopicItem qDocTopicItem = qDocTopicItems.get(i);
+
+			if (pDocTopicItem.topics.size() != qDocTopicItem.topics.size()) {
+				// logger.error("P size: " + pDocTopicItem.topics.size());
+				// logger.error("Q size: " + qDocTopicItem.topics.size());
+				// logger.error("P and Q for Jensen Shannon Divergence not the same size...exiting");
+				// System.exit(0);
+				System.out.println("not the same size");
+			}
+
+			double[] sortedP = new double[pDocTopicItem.topics.size()];
+			double[] sortedQ = new double[qDocTopicItem.topics.size()];
+
+			for (TopicItem pTopicItem : pDocTopicItem.topics) {
+				sortedP[pTopicItem.topicNum] = pTopicItem.proportion;
+			}
+
+			for (TopicItem qTopicItem : qDocTopicItem.topics) {
+				sortedQ[qTopicItem.topicNum] = qTopicItem.proportion;
+			}
+
+			// divergence = jsDivergence(sortedP, sortedQ);
+			double divergence = Maths.jensenShannonDivergence(sortedP, sortedQ);
+			System.out.println(divergence);
+			// divergence = 0;
 		}
 	}
 
