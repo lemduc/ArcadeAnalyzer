@@ -41,9 +41,12 @@ public class Comparison {
 		System.out.println(pDocTopicItems.size());
 		System.out.println(qDocTopicItems.size());
 
-		for (int i = 0; i < topics; i++) {
-			DocTopicItem pDocTopicItem = pDocTopicItems.get(i);
-			DocTopicItem qDocTopicItem = qDocTopicItems.get(i);
+		for (DocTopicItem pDocTopicItem: pDocTopicItems){
+			double minD = 1;
+			for (DocTopicItem qDocTopicItem: qDocTopicItems){
+//		for (int i = 0; i < topics; i++) {
+//			DocTopicItem pDocTopicItem = pDocTopicItems.get(i);
+//			DocTopicItem qDocTopicItem = qDocTopicItems.get(i);
 
 			if (pDocTopicItem.topics.size() != qDocTopicItem.topics.size()) {
 				// logger.error("P size: " + pDocTopicItem.topics.size());
@@ -66,8 +69,11 @@ public class Comparison {
 
 			// divergence = jsDivergence(sortedP, sortedQ);
 			double divergence = Maths.jensenShannonDivergence(sortedP, sortedQ);
-			System.out.println(divergence);
+			if (divergence<minD)
+				minD = divergence;
 			// divergence = 0;
+			}
+			System.out.println(minD);
 		}
 	}
 
