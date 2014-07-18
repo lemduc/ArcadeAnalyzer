@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/AnalyzeResult/src/malletComparison/Comparison.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="malletComparison.Comparison"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="G:\Data\arc\arc_1st_run\jackrabbit-core-1.6.5-0_175_topics.mallet&#13;&#10;G:\Data\arc\arc_1st_run\jackrabbit-core-1.6.5-0_175_topics.mallet"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="AnalyzeResult"/>
+</launchConfiguration>
