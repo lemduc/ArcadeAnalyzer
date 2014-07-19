@@ -6,7 +6,9 @@
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
+<stringAttribute key="org.eclipse.debug.ui.ATTR_CAPTURE_IN_FILE" value="${workspace_loc:/AnalyzeResult}/console.log"/>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_CONSOLE_OUTPUT_ON" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="malletComparison.Comparison"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="data/arc/arc_1st_run/jackrabbit-core-1.6.5-0_175_topics.mallet&#13;&#10;data/arc/arc_1st_run/jackrabbit-core-1.6.5-0_175_topics.mallet&#10;&quot;data/jackrabbit-core-1.6.5-0&quot;"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="data/arc/arc_1st_run/jackrabbit-core-1.6.5-0_175_topics.mallet&#13;&#10;data/arc/arc_3rd_run/jackrabbit-core-1.6.5-0_175_topics.mallet&#10;&quot;data/jackrabbit-core-1.6.5-0&quot;"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="AnalyzeResult"/>
 </launchConfiguration>
