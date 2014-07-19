@@ -41,27 +41,30 @@ import edu.usc.softarch.arcade.util.FileListing;
 import edu.usc.softarch.arcade.util.FileUtil;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 public class Comparison {
 
 	public static void main(String[] args) throws IOException {
 		String src = args[2];
 		int numTopics = 175;
-		compareTopicWords(args,src);
-		//compareDocTopics(args, src, topics);
+		compareTopicWords(args, src);
+		// compareDocTopics(args, src, topics);
 	}
 
 	private static void compareTopicWords(String[] args, String src) {
-		ParallelTopicModel modelP = getModel(src,args[0]);
-		ParallelTopicModel modelQ = getModel(src,args[1]);
-		
-		Map<Integer,Topic> pTopics = getWordTopicDistributions(modelP);
-		Map<Integer,Topic> qTopics = getWordTopicDistributions(modelQ);
-		
-		assert(pTopics.get(0).wordNormWeights.keySet().size() == qTopics.get(0).wordNormWeights.keySet().size());
-		
-		TreeSet<String> sortedWords = new TreeSet(pTopics.get(0).wordNormWeights.keySet());
-		
+		ParallelTopicModel modelP = getModel(src, args[0]);
+		ParallelTopicModel modelQ = getModel(src, args[1]);
+
+		Map<Integer, Topic> pTopics = getWordTopicDistributions(modelP);
+		Map<Integer, Topic> qTopics = getWordTopicDistributions(modelQ);
+
+		assert (pTopics.get(0).wordNormWeights.keySet().size() == qTopics
+				.get(0).wordNormWeights.keySet().size());
+
+		TreeSet<String> sortedWords = new TreeSet(
+				pTopics.get(0).wordNormWeights.keySet());
+		double[] minJsDivs = new double[pTopics.keySet().size()];
 		for (int pTopicId = 0; pTopicId < pTopics.keySet().size(); pTopicId++) {
 			double minJsDiv = 1;
 			int minQTopicId = -1;
@@ -76,72 +79,82 @@ public class Comparison {
 							.get(sortedWord);
 					wordIdx++;
 				}
-				
-				double jsDiv = Maths.jensenShannonDivergence(sortedPWordNormWeights, sortedQWordNormWeights);
-				System.out.println("jsDiv: " + jsDiv + " for p topic " + pTopicId + " and q topic " + qTopicId);
+
+				double jsDiv = Maths.jensenShannonDivergence(
+						sortedPWordNormWeights, sortedQWordNormWeights);
+				System.out.println("jsDiv: " + jsDiv + " for p topic "
+						+ pTopicId + " and q topic " + qTopicId);
 				if (jsDiv < minJsDiv) {
 					minJsDiv = jsDiv;
 					minQTopicId = qTopicId;
 				}
 			}
-			System.out.println("\t minimum jsDiv for p topic " + pTopicId + " is q topic " + minQTopicId + " with jsDiv: " + minJsDiv);
+			System.out
+					.println("\t minimum jsDiv for p topic " + pTopicId
+							+ " is q topic " + minQTopicId + " with jsDiv: "
+							+ minJsDiv);
+			minJsDivs[pTopicId] = minJsDiv;
 		}
-		
+		DescriptiveStatistics stats = new DescriptiveStatistics(minJsDivs);
+		System.out.println(stats);
+
 	}
 
-	public static Map<Integer,Topic> getWordTopicDistributions(ParallelTopicModel model) {
+	public static Map<Integer, Topic> getWordTopicDistributions(
+			ParallelTopicModel model) {
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter writer = new PrintWriter(stringWriter);
 		try {
-			
-			Map<Integer,Topic> topics = new HashMap<Integer,Topic>();
-			
-			for (int topicIdx=0; topicIdx < model.getNumTopics(); topicIdx++) {
+
+			Map<Integer, Topic> topics = new HashMap<Integer, Topic>();
+
+			for (int topicIdx = 0; topicIdx < model.getNumTopics(); topicIdx++) {
 				Topic topic = new Topic();
 				topic.id = topicIdx;
 				topics.put(topicIdx, topic);
 			}
 			model.printTopicWordWeights(writer);
-			//System.out.println(stringWriter.toString());
-			
-			BufferedReader bufReader = new BufferedReader(new StringReader(stringWriter.toString()));
-			String line=null;
-			while( (line=bufReader.readLine()) != null )
-			{
-				//System.out.println(line);
+			// System.out.println(stringWriter.toString());
+
+			BufferedReader bufReader = new BufferedReader(new StringReader(
+					stringWriter.toString()));
+			String line = null;
+			while ((line = bufReader.readLine()) != null) {
+				// System.out.println(line);
 				String[] tokens = line.trim().split("\\s");
 				int topicNum = Integer.parseInt(tokens[0]);
 				String word = tokens[1].trim();
-				double weight = Double.parseDouble( tokens[2].trim() );
+				double weight = Double.parseDouble(tokens[2].trim());
 				if (weight > model.beta) {
 					System.out.println(topicNum + " " + word + " " + weight);
 				}
-				
+
 				Topic currTopic = topics.get(topicNum);
 				currTopic.wordWeights.put(word, weight);
 			}
-			
+
 			for (Topic topic : topics.values()) {
 				double weightSum = 0;
 				for (String word : topic.wordWeights.keySet()) {
 					double weight = topic.wordWeights.get(word);
 					weightSum += weight;
 				}
-				
+
 				for (String word : topic.wordWeights.keySet()) {
 					double weight = topic.wordWeights.get(word);
-					double normWeight = weight/weightSum;
-					topic.minNormWeight = model.beta/weightSum;
+					double normWeight = weight / weightSum;
+					topic.minNormWeight = model.beta / weightSum;
 					topic.wordNormWeights.put(word, normWeight);
 				}
 			}
-			
+
 			System.out.println("-- normalized word weights per topic --");
-			for (Topic topic: topics.values()) {
+			for (Topic topic : topics.values()) {
 				for (String word : topic.wordWeights.keySet()) {
-					double normWeight =	topic.wordNormWeights.get(word);
+					double normWeight = topic.wordNormWeights.get(word);
 					if (normWeight > topic.minNormWeight) {
-						System.out.println(topic.id + " " + word + " " + normWeight);
+						System.out.println(topic.id + " " + word + " "
+								+ normWeight);
 					}
 				}
 			}
@@ -153,7 +166,8 @@ public class Comparison {
 		return null;
 	}
 
-	private static ParallelTopicModel getModel(String src, String topicModelFilename) {
+	private static ParallelTopicModel getModel(String src,
+			String topicModelFilename) {
 		ParallelTopicModel model = null;
 		File topicModelFile = new File(topicModelFilename);
 		if (topicModelFile.exists()) {
@@ -172,7 +186,7 @@ public class Comparison {
 			throws FileNotFoundException, IOException {
 		ArrayList<DocTopicItem> pDocTopicItems = DocTopics(src, topics, args[0]);
 		ArrayList<DocTopicItem> qDocTopicItems = DocTopics(src, topics, args[1]);
-		
+
 		System.out.println(pDocTopicItems.size());
 		System.out.println(qDocTopicItems.size());
 
