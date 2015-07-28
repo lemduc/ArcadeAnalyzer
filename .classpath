@@ -6,5 +6,9 @@
 	<classpathentry kind="lib" path="libs/mallet.jar" sourcepath="/mallet2.0.7"/>
 	<classpathentry kind="lib" path="libs/commons-lang3-3.1.jar"/>
 	<classpathentry kind="lib" path="libs/commons-math3-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="libs/jgrapht-jdk1.6.jar"/>
+	<classpathentry kind="lib" path="libs/xstream-1.4.6.jar"/>
+	<classpathentry kind="lib" path="libs/jackson-core-2.5.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
