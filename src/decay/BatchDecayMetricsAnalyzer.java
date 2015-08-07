@@ -1,7 +1,10 @@
 package decay;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,8 +22,10 @@ import edu.usc.softarch.arcade.util.FileUtil;
 public class BatchDecayMetricsAnalyzer {
 	static Logger logger = Logger.getLogger(BatchDecayMetricsAnalyzer.class);
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 		PropertyConfigurator.configure(Config.getLoggingConfigFilename());
+		
+		String outputFile = args[2];
 		// Directory containing all clustered rsf files
 		String clustersDir = FileUtil.tildeExpandPath(args[0]);
 		
@@ -101,6 +106,8 @@ public class BatchDecayMetricsAnalyzer {
 			}
 		}
 		
+		String statResult = "";
+		
 		for (String key : decayMetrics.keySet()) {
 			List<Double> vals = decayMetrics.get(key);
 			double[] valArr = ArrayUtils.toPrimitive(vals.toArray(new Double[vals.size()]));
@@ -110,21 +117,46 @@ public class BatchDecayMetricsAnalyzer {
 			logger.info(header);
 			logger.info(stats);
 			System.out.println(stats);
+			statResult += header + "\n";
+			statResult += stats.toString() + "\n\n";
 		}
 		
 		//print as csv file
-		
+		String csv = "";
 		System.out.println("version, numOfClusters, numofTwoWayPair, rci, twoway, stabilit, mq,");
+		csv += "version, numOfClusters, numofTwoWayPair, rci, twoway, stabilit, mq,\n";
 		for (int i = 0; i < versionVals.size(); i++){
 			System.out.print(versionVals.get(i)+", ");
+			csv += versionVals.get(i)+", ";
 			System.out.print(clusSizeVals.get(i)+", ");
+			csv += clusSizeVals.get(i)+", ";
 			System.out.print(twoWayPairsVals.get(i)+", ");
-			
+			csv += twoWayPairsVals.get(i)+", ";
 			for (String key : decayMetrics.keySet()) {
 				System.out.print(decayMetrics.get(key).get(i)+", ");
+				csv += decayMetrics.get(key).get(i)+", ";
 			}	
 			System.out.println();
+			csv += "\n";
 		}
+		writeToFile(csv + "\n" + statResult, outputFile );
+	}
+	
+	
+	private static void writeToFile(String content,String path) throws IOException {
+		File file = new File(path);
+
+		// if file doesnt exists, then create it
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+
+		FileWriter fw = new FileWriter(file.getAbsoluteFile());
+		BufferedWriter bw = new BufferedWriter(fw);
+		bw.write(content);
+		bw.close();
+
+		System.out.println("Done");
 	}
 
 }
