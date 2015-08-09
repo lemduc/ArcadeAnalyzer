@@ -113,7 +113,6 @@ public class BatchDecayMetricsAnalyzer {
 		}
 		
 		//print as csv file
-		
 		System.out.println("version, numOfClusters, numofTwoWayPair, rci, twoway, stabilit, mq,");
 		for (int i = 0; i < versionVals.size(); i++){
 			System.out.print(versionVals.get(i)+", ");
