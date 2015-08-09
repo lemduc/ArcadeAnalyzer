@@ -99,9 +99,10 @@ public class DecayMetricAnalyzer {
 				clusterFactors.put(cluster.getName(),new Double(0));
 			}
 			else {
-				Set<MutablePair<String,String>> edgesInto = intoEdgeMap.get(cluster.getName());
-				int interEdgesSum = edgesInto.size() + externalEdges.size();
-				double cf = (double)(2*internalEdges.size())/(2*internalEdges.size()+interEdgesSum); 
+//				Set<MutablePair<String,String>> edgesInto = intoEdgeMap.get(cluster.getName());
+//				int interEdgesSum = edgesInto.size() + externalEdges.size();
+//				int interEdgesSum = externalEdges.size();
+				double cf = (double)(2*internalEdges.size())/(2*internalEdges.size()+externalEdges.size()); 
 				clusterFactors.put(cluster.getName(), cf);
 			}		
 		}
