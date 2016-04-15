@@ -1,17 +1,17 @@
+package FSE2014_SmellCounter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 
-public class MojoAnalyzeBetweenBigVersionHadoopARC {
+public class MojoAnalyzeBetweenBigVersion {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		String sourceFile = "G:\\JackRabbit_Analysis_Full_Result\\MojoEvoAnalyzer_Acdc.txt";
 //		String sourceFile = "G:\\JackRabbit_Analysis_Full_Result\\MojoEvoAnalyzer_Arc.txt";
 //		String sourceFile = "G:\\Struts_Analyze_result\\Acdc_MojoFM.txt";
-//		String sourceFile = "G:\\Struts_Analyze_result\\Arc_MojoFM.txt";
-		String sourceFile = "G:\\hadoop_cassandra\\cassandra\\acdc\\arc_mojofm.log";
+		String sourceFile = "G:\\Struts_Analyze_result\\Arc_MojoFM.txt";
 		String targetFile = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(sourceFile)))
 		{
@@ -37,9 +37,9 @@ public class MojoAnalyzeBetweenBigVersionHadoopARC {
 					float metric = Float.parseFloat(sCurrentLine.split(":")[1].replaceAll(" ", ""));
 					System.out.println(sCurrentLine);
 					String[] temp = sCurrentLine.split("_")[0].split("-");
-					String[] fromVersion = temp[1].split("\\.");
+					String[] fromVersion = temp[temp.length-1].split("\\.");
 					temp = sCurrentLine.split("_")[5].split("-");
-					String[] toVersion = temp[1].split("\\.");
+					String[] toVersion = temp[temp.length-1].split("\\.");
 					
 					if (!fromVersion[0].equals(toVersion [0])){
 						Majortotal += metric;

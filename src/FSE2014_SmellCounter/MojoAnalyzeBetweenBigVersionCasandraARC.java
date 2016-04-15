@@ -1,14 +1,18 @@
+package FSE2014_SmellCounter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 
-public class MojoAnalyzeBetweenBigVersionHadoopACDC {
+public class MojoAnalyzeBetweenBigVersionCasandraARC {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		String sourceFile = "G:\\hadoop_cassandra\\hadoop_svn\\arc\\mojoevol_arc_hadoop.log";
-		String sourceFile = "G:\\metrics.zipEder\\mojo distance\\mojo distance jspwiki acdc.rtf";
+//		String sourceFile = "G:\\JackRabbit_Analysis_Full_Result\\MojoEvoAnalyzer_Acdc.txt";
+//		String sourceFile = "G:\\JackRabbit_Analysis_Full_Result\\MojoEvoAnalyzer_Arc.txt";
+//		String sourceFile = "G:\\Struts_Analyze_result\\Acdc_MojoFM.txt";
+//		String sourceFile = "G:\\Struts_Analyze_result\\Arc_MojoFM.txt";
+		String sourceFile = "G:\\hadoop_cassandra\\cassandra\\acdc\\arc_mojofm.log";
 		String targetFile = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(sourceFile)))
 		{

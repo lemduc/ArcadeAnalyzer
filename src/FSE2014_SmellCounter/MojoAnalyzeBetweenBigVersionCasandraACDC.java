@@ -1,9 +1,10 @@
+package FSE2014_SmellCounter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 
-public class MojoAnalyzeBetweenBigVersionCasandraARC {
+public class MojoAnalyzeBetweenBigVersionCasandraACDC {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -11,7 +12,7 @@ public class MojoAnalyzeBetweenBigVersionCasandraARC {
 //		String sourceFile = "G:\\JackRabbit_Analysis_Full_Result\\MojoEvoAnalyzer_Arc.txt";
 //		String sourceFile = "G:\\Struts_Analyze_result\\Acdc_MojoFM.txt";
 //		String sourceFile = "G:\\Struts_Analyze_result\\Arc_MojoFM.txt";
-		String sourceFile = "G:\\hadoop_cassandra\\cassandra\\acdc\\arc_mojofm.log";
+		String sourceFile = "G:\\hadoop_cassandra\\cassandra\\acdc\\acdc_mojofm.log";
 		String targetFile = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(sourceFile)))
 		{
@@ -38,7 +39,7 @@ public class MojoAnalyzeBetweenBigVersionCasandraARC {
 					System.out.println(sCurrentLine);
 					String[] temp = sCurrentLine.split("_")[0].split("-");
 					String[] fromVersion = temp[1].split("\\.");
-					temp = sCurrentLine.split("_")[5].split("-");
+					temp = sCurrentLine.split("_")[2].split("-");
 					String[] toVersion = temp[1].split("\\.");
 					
 					if (!fromVersion[0].equals(toVersion [0])){

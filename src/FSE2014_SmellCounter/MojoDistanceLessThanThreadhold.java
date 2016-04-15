@@ -1,9 +1,10 @@
+package FSE2014_SmellCounter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 
-public class MojoDistanceLessThanThreadholdSignificant {
+public class MojoDistanceLessThanThreadhold {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -29,13 +30,12 @@ public class MojoDistanceLessThanThreadholdSignificant {
 //		String sourceFile = "C:\\Users\\Duc Le\\Desktop\\Dropbox\\evolution\\subject_system\\chukwa\\arc\\chukwa_rel_mojarc.log";
 //		String sourceFile = "C:\\Users\\Duc Le\\Desktop\\Dropbox\\evolution\\subject_system\\chukwa\\acdc\\chukwa_rel_mojacd.log";
 //		String sourceFile = "G:\\mojo distance pdfbox arc.txt";
-		String sourceFile = "G:\\activemq\\arc\\mojoevol.log";
+		String sourceFile = "G:\\activemq\\acdc\\mojoevol.log";
 		String targetFile = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(sourceFile)))
 		{
  
 			String sCurrentLine;
-			float threshold = 50;
 			int distance = 0;
 			int count = 0;
 			float avg = 0;
@@ -49,14 +49,12 @@ public class MojoDistanceLessThanThreadholdSignificant {
 //						System.out.println("Count :" + count);
 						System.out.println("Distance "+distance+" has average: " + avg);
 					}
-					distance = Integer.parseInt(sCurrentLine.split(":")[1].replace(" ", ""));
+					distance = Integer.parseInt(sCurrentLine.split(":")[1].replaceAll(" ", ""));
 					count = 0;
 					total = 0;
 				}
 				if(sCurrentLine.contains("MoJoFM from")){
 					float temp = Float.parseFloat(sCurrentLine.split(":")[1]);
-					if (temp < threshold )
-						System.out.println(sCurrentLine);
 					count += 1;
 					total += temp;
 				}

@@ -1,3 +1,4 @@
+package FSE2014_SmellCounter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
