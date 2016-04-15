@@ -1,4 +1,4 @@
-package codesmell;
+package CodeSmellAnalyzer;
 
 public class Constant {
 	public static String PUBLIC_CLASS = "Public Class";

@@ -1,4 +1,4 @@
-package smell;
+package ArchSmellAnalyzer;
 
 import java.io.File;
 import java.io.FileNotFoundException;

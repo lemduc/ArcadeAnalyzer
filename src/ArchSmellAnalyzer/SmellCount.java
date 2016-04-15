@@ -1,4 +1,4 @@
-package smell;
+package ArchSmellAnalyzer;
 
 public class SmellCount {
 	int buo = 0;

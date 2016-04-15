@@ -15,5 +15,7 @@
 	<classpathentry kind="lib" path="libs/poi-ooxml-3.13-beta1-20150723.jar"/>
 	<classpathentry kind="lib" path="libs/poi-ooxml-schemas-3.13-beta1-20150723.jar"/>
 	<classpathentry kind="lib" path="libs/poi-scratchpad-3.13-beta1-20150723.jar"/>
+	<classpathentry kind="lib" path="libs/json-simple-1.1.1.jar"/>
+	<classpathentry kind="src" path="resource"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

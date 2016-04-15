@@ -1,4 +1,4 @@
-package decay;
+package DecayMetrics;
 
 import java.io.BufferedWriter;
 import java.io.File;
