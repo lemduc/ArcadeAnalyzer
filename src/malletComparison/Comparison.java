@@ -379,7 +379,7 @@ public class Comparison {
 					}
 				}
 				reader.close();
-				String data = FileUtil.readFile(file.getAbsolutePath(),
+				String data = FileUtil.readFile(file,
 						Charset.defaultCharset());
 				Instance instance = new Instance(data, "X", fullClassName,
 						file.getAbsolutePath());
@@ -391,7 +391,7 @@ public class Comparison {
 				// logger.debug("Current file in DocTopics: " + file);
 				String depsStyleFilename = file.getAbsolutePath().replace(
 						testDir, "");
-				String data = FileUtil.readFile(file.getAbsolutePath(),
+				String data = FileUtil.readFile(file,
 						Charset.defaultCharset());
 				Instance instance = new Instance(data, "X", depsStyleFilename,
 						file.getAbsolutePath());

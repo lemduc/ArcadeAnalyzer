@@ -27,10 +27,12 @@ public class BatchDecayMetricsAnalyzer {
 		
 		String outputFile = args[2];
 		// Directory containing all clustered rsf files
-		String clustersDir = FileUtil.tildeExpandPath(args[0]);
+		String clustersDir = args[0]; // FileUtil.tildeExpandPath(args[0]);
+		
 		
 		// Directory containing all deps rsf files
-		String depsDir = FileUtil.tildeExpandPath(args[1]);
+		String depsDir = args[1]; //FileUtil.tildeExpandPath(args[1]);
+		
 		
 		List<File> clusterFiles = FileListing.getFileListing(new File(clustersDir));
 		List<File> depsFiles = FileListing.getFileListing(new File(depsDir));

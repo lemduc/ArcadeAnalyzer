@@ -1,5 +1,6 @@
 package DecayMetrics;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -38,13 +39,14 @@ public class DecayMetricAnalyzer {
 		numberOfCluster =-1;
 		numberOfTwowayPair = -1;
 		
-		String clustersFilename = FileUtil.tildeExpandPath(args[0]);
-		String depsRsfFilename = FileUtil.tildeExpandPath(args[1]);
+	
+		String clustersFilename = args[0]; // FileUtil.tildeExpandPath(args[0]);
+		String depsRsfFilename = args[1]; // FileUtil.tildeExpandPath(args[1]);
 		String readingClustersFile = "Reading in clusters file: " + clustersFilename;
 		System.out.println(readingClustersFile);
 		logger.info(readingClustersFile);
 		
-		Set<ConcernCluster> clusters = ConcernClusterRsf.extractConcernClustersFromRsfFile(clustersFilename);
+		Set<ConcernCluster> clusters = ConcernClusterRsf.extractConcernClustersFromRsfFile(new File(clustersFilename));
 		
 		boolean showBuiltClusters = true;
 		if (showBuiltClusters) {
@@ -59,7 +61,7 @@ public class DecayMetricAnalyzer {
 		String readingDepsFile = "Reading in deps file: " + depsRsfFilename;
 		System.out.println(readingDepsFile);
 		logger.info(readingDepsFile);
-		Map<String, Set<String>> depMap = ClusterUtil.buildDependenciesMap(depsRsfFilename);
+		Map<String, Set<String>> depMap = ClusterUtil.buildDependenciesMap(new File(depsRsfFilename));
 		
 		StringGraph clusterGraph = ClusterUtil.buildClusterGraphUsingDepMap(depMap,clusters);
 		

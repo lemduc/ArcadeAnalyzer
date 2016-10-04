@@ -34,10 +34,10 @@ public class SmellDensityAnalyzer {
 		LogUtil.printLogFiles();
 		
 		// inputDirFilename is the directory containing the .ser files which contain detected smells
-		String inputDirFilename = FileUtil.tildeExpandPath(args[0]);
+		String inputDirFilename = args[0]; //FileUtil.tildeExpandPath(args[0]);
 		
 		// directory containing the cluster rsf files matching the smells .ser files
-		String clustersDirName = FileUtil.tildeExpandPath(args[1]);
+		String clustersDirName = args[1]; // FileUtil.tildeExpandPath(args[1]);
 		
 		List<File> fileList = FileListing.getFileListing(new File(inputDirFilename));
 		fileList = FileUtil.sortFileListByVersion(fileList);
@@ -73,7 +73,7 @@ public class SmellDensityAnalyzer {
 		for (File file : clustersFileList) {
 			Pattern p = Pattern.compile(versionSchemeExpr);
 			Matcher m  = p.matcher(file.getName());
-			Set<ConcernCluster> clusters = ConcernClusterRsf.extractConcernClustersFromRsfFile(file.getAbsolutePath());
+			Set<ConcernCluster> clusters = ConcernClusterRsf.extractConcernClustersFromRsfFile(file);
 			
 			String version = FileUtil.extractVersionFromFilename(versionSchemeExpr,file.getName());
 			assert !version.equals("") : "Could not extract version";
@@ -91,7 +91,8 @@ public class SmellDensityAnalyzer {
 			
 			Set<ConcernCluster> allSmellyClusters = new HashSet<ConcernCluster>();
 			for (Smell smell : smells) {
-				allSmellyClusters.addAll(smell.clusters);
+//				Don't know why this doesn't work anymore
+//				allSmellyClusters.addAll(smell.clusters);
 			}
 			
 			Set<ConcernCluster> clusters = versionClusters.get(version);
