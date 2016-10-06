@@ -22,10 +22,11 @@ public class RQ3_CountCommitsRelatedToSmellyFiles {
 	
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
+		String mainFolder = "F:\\USC Google Drive\\Research\\ICSE_2017\\data\\hadoop\\";
 //		String issue_json = "F:\\hadoop_data\\hadoop_pkg_full_shorted_removed_dc.json";
-		String issue_json = "F:\\ASE_2016_data\\Hadoop\\all_smells\\hadoop_pkg_all_filter_versions.json";
+		String issue_json = mainFolder + "all_smells\\hadoop_pkg_all_filter_versions.json";
 //		String commit_freq = "F:\\ASE_2016_data\\Struts2\\struts2_freq.txt";
-		String commit_freq = "F:\\ASE_2016_data\\Hadoop\\Hadoop_freq.txt";
+		String commit_freq = mainFolder + "Hadoop_freq.txt";
 		
 //		String issue_json = "F:\\ASE_2016_data\\Struts2\\all_smells\\Struts2_pkg_all.json";
 		

@@ -4,13 +4,20 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Vector;
 
+import org.apache.poi.util.ArrayUtil;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.omg.CORBA.VersionSpecHelper;
 
 public class RQ4_CountCommitsRelated2LongTermSmelly {
 	
@@ -22,16 +29,25 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 	
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
+		String mainFolder = "F:\\USC Google Drive\\Research\\ICSE_2017\\data\\hadoop\\";
 //		String issue_json = "F:\\hadoop_data\\hadoop_pkg_full_shorted_removed_dc.json";
-		String issue_json = "F:\\ASE_2016_data\\Hadoop\\all_smells\\hadoop_pkg_all_filter_versions.json";
+		String issue_json = mainFolder + "all_smells\\hadoop_pkg_all_filter_versions.json";
 //		String commit_freq = "F:\\ASE_2016_data\\Struts2\\struts2_freq.txt";
-   		String commit_freq = "F:\\ASE_2016_data\\Hadoop\\Hadoop_freq.txt";
+   		String commit_freq = mainFolder + "Hadoop_freq.txt";
 		
 //		String issue_json = "F:\\ASE_2016_data\\Struts2\\all_smells\\Struts2_pkg_all.json";
+   		
+   		HashMap<String, HashMap<String, Integer>> countAffectedVersions = new HashMap<>();
 		
 		HashMap<String, Integer> countCommitsForSmelly = new HashMap<>();
 		HashMap<String, Integer> countCommitsForNonSmelly = new HashMap<>();
 		
+		HashMap<String, Integer> countIssuesForSmelly = new HashMap<>();
+		HashMap<String, Integer> countIssuesForNonSmelly = new HashMap<>();
+		
+		HashMap<String, Integer> countIssuesForVersion = new HashMap<>();
+		
+		HashSet<String> versionList = new HashSet<>();
 		
 		HashMap<String, String> commitFreg = new HashMap<>();
 		Vector<String> listFiles = new Vector<>();
@@ -69,6 +85,17 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 		for (int i = 0; i < issues.size(); i ++){
 			JSONObject issue = (JSONObject) issues.get(i);
 			boolean isSmell = false;		
+			String affectedVersion = (String) issue.get("affect");
+			versionList.add(affectedVersion);
+			boolean isSmellIssues = false;
+			
+			Integer c = countIssuesForVersion.get(affectedVersion);
+			if (c==null)
+				c=0;
+			c++;
+			countIssuesForVersion.put(affectedVersion, c);
+			
+			
 			JSONArray commits = (JSONArray) issue.get("commits");
 			
 			for (int j = 0; j < commits.size(); j++){
@@ -80,6 +107,7 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 					
 					if (smells != null && smells.keySet() != null){
 						isSmell = true;
+						isSmellIssues = true;
 					}
 					
 					if (isSmell){
@@ -91,11 +119,22 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 							else
 								counter ++;
 							countCommitsForSmelly.put(filename, counter);
+							
+							//maping to affected versions
+							HashMap affectedVersions = countAffectedVersions.get(filename);
+							if (affectedVersions == null)
+								affectedVersions = new HashMap<>();
+							Integer countVersioin = (Integer) affectedVersions.get(affectedVersion);
+							if (countVersioin == null)
+								countVersioin = 0;
+							countVersioin++;
+							affectedVersions.put(affectedVersion, countVersioin);
+							countAffectedVersions.put(filename, affectedVersions);
 						}
 					}
 					else
 					{
-						if (!((String) issue.get("affect")).equals("")){
+//						if (!((String) issue.get("affect")).equals("")){
 							String filename = (String) file.get("filename");
 							if (filename.endsWith("java")){
 								Integer counter = countCommitsForNonSmelly.get(filename);
@@ -104,17 +143,88 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 								else
 									counter ++;
 								countCommitsForNonSmelly.put(filename, counter);
-							}
+//							}
 						}
 					}
 				}
 			}
+			
+			
+			if (isSmellIssues){
+ 				Integer count = countIssuesForSmelly.get(affectedVersion);
+				if (count == null){
+					count = 0;
+				}
+				count++;
+				countIssuesForSmelly.put(affectedVersion, count);
+			} else{
+				Integer count = countIssuesForNonSmelly.get(affectedVersion);
+				if (count == null){
+					count = 0;
+				}
+				count++;
+				countIssuesForNonSmelly.put(affectedVersion, count);
+			}
+			
 		}
+	
+		// Count percentage
 		
+		ArrayList<String> sortList = new ArrayList<>(versionList);
+		Collections.sort(sortList);
+		/*
+		for (String version: sortList){
+			System.out.print(version+ ",") ;
+			
+			Integer sm;
+			Integer nsm;
+		
+			
+			sm = countIssuesForSmelly.get(version);
+			if (sm == null)
+				sm = 0;
+			nsm = countIssuesForNonSmelly.get(version);
+			if (nsm == null)
+				nsm = 0;
+			
+			int total = sm + nsm;
+			if (total != 0)
+			{	
+				System.out.print((float)sm/total + ",");
+				System.out.println((float)nsm/total + ",");
+			}
+		}
+		*/
+		
+		//
+		System.out.println("Count Long lived file******************************");
+		System.out.print("File name,");
+		for (String v: sortList){
+			System.out.print(v+ ",");
+		}
+		System.out.println();
+		for (String file : countAffectedVersions.keySet()){
+			if (countAffectedVersions.get(file).keySet().size() > 20){
+				System.out.print(file + ",");// + countAffectedVersions.get(file).size());
+				for (String v: sortList){
+					Integer num = countAffectedVersions.get(file).get(v);
+					if ( num == null)
+						num = 0;
+					System.out.print(num + ",");
+				}
+				System.out.println();
+			}
+		}
+		System.out.print("All version,");
+		for (String v: sortList){
+			System.out.print(countIssuesForVersion.get(v)+ ",");
+		}
+		System.out.println();
 		
 		//count commit freg
 		System.out.print("smell issues,");
 		for (String file : countCommitsForSmelly.keySet()){
+			String orgFile = file;
 			if (file.startsWith("trunk/"))
 				file = file.replace("trunk/", "");
 			if (file.startsWith("branches/STRUTS_2_0_X/"))
@@ -134,7 +244,8 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 			
 			String freq = "";
 			if (fullName != ""){
-				freq = commitFreg.get(fullName);
+//				freq = commitFreg.get(fullName);
+				freq = String.valueOf(countCommitsForSmelly.get(orgFile));
 			}
 //			if (freq == null){
 //				System.out.print(file + ",");
@@ -147,6 +258,7 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 		System.out.println();
 		System.out.print("non_smell issues,");
 		for (String file : countCommitsForNonSmelly.keySet()){
+			String orgFile = file;
 			if (file.startsWith("trunk/"))
 				file = file.replace("trunk/", "");
 			if (file.startsWith("branches/STRUTS_2_0_X/"))
@@ -165,11 +277,18 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 			}
 			String freq = "";
 			if (fullName != ""){
-				freq = commitFreg.get(fullName);
+//				freq = commitFreg.get(fullName);
+				freq = String.valueOf(countCommitsForNonSmelly.get(orgFile));
 			}
 			if (freq != ""){
 				System.out.print(freq + ",");
 			}
 		}
+//		Find top smelly files
+		
+		
+		  
+		
+		
 	}
 }
