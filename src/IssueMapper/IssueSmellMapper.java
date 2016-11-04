@@ -32,10 +32,10 @@ public class IssueSmellMapper {
 //					.readJsonFromFile(projectConfig.getValue("SMELL_PKG"));
 //			addSmess2All();
 //			JSONUtil.writeJSONArray2File(issues, projectConfig.getValue("DEP_CON_PKG"));
-//			smells = (JSONArray) JSONUtil
-//					.readJsonFromFile(projectConfig.getValue("SMELL_ARC"));
-//			addSmess2All();
-//			JSONUtil.writeJSONArray2File(issues, projectConfig.getValue("DEP_CON_ARC"));
+			smells = (JSONArray) JSONUtil
+					.readJsonFromFile(projectConfig.getValue("SMELL_ARC"));
+			addSmess2All();
+			JSONUtil.writeJSONArray2File(issues, projectConfig.getValue("DEP_CON_ARC"));
 //			smells = (JSONArray) JSONUtil
 //					.readJsonFromFile(projectConfig.getValue("SMELL_ACDC"));
 //			addSmess2All();
@@ -105,7 +105,12 @@ public class IssueSmellMapper {
 								tmpSmell.put("Concern_Overload", tmpSmellNum);
 							}
 							// exclude dependency cycle for now
-							// tmpSmell.put("bdc", smellPerVersion.get("bdc"));
+							// tmpSmellNum = Integer.parseInt(smellPerVersion
+							// .get("bdc").toString());
+							//	if (tmpSmellNum != 0) {
+							//		tmpSmell.put("Dependency_Cycle", tmpSmellNum);
+							//	}
+							
 							tmpSmellNum = Integer.parseInt(smellPerVersion.get(
 									"buo").toString());
 							if (tmpSmellNum != 0) {
@@ -126,7 +131,11 @@ public class IssueSmellMapper {
 								tmpSmell.put("Concern_Overload", tmpSmellNum);
 							}
 							// exclude dependency cycle for now
-							// tmpSmell.put("bdc", smellPerVersion.get("bdc"));
+							// tmpSmellNum = Integer.parseInt(smellPerVersion
+							// .get("bdc").toString());
+							//	if (tmpSmellNum != 0) {
+							//		tmpSmell.put("Dependency_Cycle", tmpSmellNum);
+							//	}
 							tmpSmellNum = Integer.parseInt(smellPerVersion.get(
 									"buo").toString());
 							if (tmpSmellNum != 0) {

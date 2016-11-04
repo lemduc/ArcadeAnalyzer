@@ -27,14 +27,14 @@ public class IssueVersionFilter {
 		
 //		versions = getVersionsFromSmell(projectConfig.getValue("SMELL_ACDC"));
 //		filterIssues(projectConfig.getValue("ALL_ACDC"), projectConfig.getValue("ACDC_FILTER"));
-//		versions = getVersionsFromSmell(projectConfig.getValue("SMELL_ARC"));
-//		filterIssues(projectConfig.getValue("ALL_ARC"), projectConfig.getValue("ARC_FILTER"));
+		versions = getVersionsFromSmell(projectConfig.getValue("SMELL_ARC"));
+		filterIssues(projectConfig.getValue("ALL_ARC"), projectConfig.getValue("ARC_FILTER"));
 //		versions = getVersionsFromSmell(projectConfig.getValue("SMELL_PKG"));
 //		filterIssues(projectConfig.getValue("ALL_PKG"), projectConfig.getValue("PKG_FILTER"));
 		
 		 versions = getVersionsFromIssue(projectConfig.getValue("ISSUE_FILE"));
 		 StringUtil.printStringSet(versions);
-		System.out.println("done! (๑•ᴗ•๑)♡‼");
+		System.out.println("done!");
 
 	}
 

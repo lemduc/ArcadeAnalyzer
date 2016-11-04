@@ -27,21 +27,33 @@ public class SmellAnylazer {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String inputDirectory = null;
-		String outputDirectory = null;
-		String outputFileName = null;
-		Scanner in = new Scanner(System.in);
-		System.out.println("input directory:");
-		inputDirectory = in.next();
+
+//		String inputDirectory = "F:\\cxf_data\\arc\\ser";
+//		String outputDirectory = "F:\\cxf_data\\excel\\arc_class";
+		
+		String inputDirectory = "F:\\camel_data\\arc\\ser";
+		String outputDirectory = "F:\\camel_data\\excel\\arc_class";
+//		
+		
+		//		String inputDirectory = "F:\\continuum_data\\pkg\\ser";
+//		String outputDirectory = "F:\\continuum_data\\excel\\pkg_class";
+		// wicket
+//		String inputDirectory = "F:\\wicket_data\\arc\\ser";
+//		String outputDirectory = "F:\\wicket_data\\excel\\arc_class";
+//		
+//		String outputFileName = null;
+//		Scanner in = new Scanner(System.in);
+//		System.out.println("input directory:");
+//		inputDirectory = in.next();
 //		System.out.println("output directory:");
 //		outputDirectory = in.next();
-		System.out.println("output file name:");
-		outputFileName = in.next();
+//		System.out.println("output file name:");
+//		outputFileName = in.next();
 		
 		Set<File> orderedSerFiles = getOrderedFiles(inputDirectory+"/");
-//		analyzeClassSmellnum(orderedSerFiles, "/Users/felicitia/Desktop/"+outputFileName);
+		analyzeClassSmellnum(orderedSerFiles, outputDirectory);// "/Users/felicitia/Desktop/"+outputFileName);
 //		analyzeVersionSmellnum(orderedSerFiles, "/Users/felicitia/Documents/Research/Arch_Decay/result/arch_smell/"+outputFileName+".csv");
-		analyzeCompSmellnum(orderedSerFiles, "/Users/felicitia/Documents/Research/Arch_Decay/result/comp_smell/"+outputFileName);
+//		analyzeCompSmellnum(orderedSerFiles, "/Users/felicitia/Documents/Research/Arch_Decay/result/comp_smell/"+outputFileName);
 	}
 
 	/**

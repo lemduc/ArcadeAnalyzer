@@ -16,7 +16,7 @@ public class cleanUpCodeMatt {
 		File[] files = folder.listFiles();
 				
 		for (File file : files) {
-			if (file.isFile()){
+			if (file.isFile() && file.getName().endsWith("csv")){
 			String sourceFile = file.getName();
 			single(sourceFile, inputDirFilename);
 			}
@@ -27,7 +27,7 @@ public class cleanUpCodeMatt {
 
 	private static void single(String sourceFile, String folder) {
 		
-		String targetFile = folder + "\\clean\\" + sourceFile.split("\\.")[0] + "_clean.csv";
+		String targetFile = folder + "\\" + sourceFile.split("\\.")[0] + "_clean.csv";
 		String output;
 		try (BufferedReader br = new BufferedReader(new FileReader(folder + "\\" + sourceFile)))
 		{

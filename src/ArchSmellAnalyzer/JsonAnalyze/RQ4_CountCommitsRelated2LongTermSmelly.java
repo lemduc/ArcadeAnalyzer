@@ -29,15 +29,23 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 	
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
-		String mainFolder = "F:\\USC Google Drive\\Research\\ICSE_2017\\data\\hadoop\\";
-//		String issue_json = "F:\\hadoop_data\\hadoop_pkg_full_shorted_removed_dc.json";
-		String issue_json = mainFolder + "all_smells\\hadoop_pkg_all_filter_versions.json";
-//		String commit_freq = "F:\\ASE_2016_data\\Struts2\\struts2_freq.txt";
-   		String commit_freq = mainFolder + "Hadoop_freq.txt";
+
+//		String issue_json = mainFolder + "struts2\\all_smells\\struts2_acdc_all_filter_versions.json";
+//		String commit_freq = mainFolder + "struts2\\struts2_freq.txt";
+		
+//		String mainFolder = "F:\\USC Google Drive\\Research\\ICSE_2017\\data\\";
+//		String issue_json = mainFolder + "hadoop\\all_smells\\hadoop_pkg_all_filter_versions.json";
+//   		String commit_freq = mainFolder + "hadoop\\Hadoop_freq.txt";
+   		
+//   		Wicket
+		String mainFolder = "F:\\wicket_data\\";
+		String issue_json = mainFolder + "wicket_pkg_all_filter.json";
+
 		
 //		String issue_json = "F:\\ASE_2016_data\\Struts2\\all_smells\\Struts2_pkg_all.json";
    		
    		HashMap<String, HashMap<String, Integer>> countAffectedVersions = new HashMap<>();
+   		HashMap<String, HashMap<String, Integer>> countAffectedVersionsNonSmelly = new HashMap<>();
 		
 		HashMap<String, Integer> countCommitsForSmelly = new HashMap<>();
 		HashMap<String, Integer> countCommitsForNonSmelly = new HashMap<>();
@@ -46,6 +54,7 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 		HashMap<String, Integer> countIssuesForNonSmelly = new HashMap<>();
 		
 		HashMap<String, Integer> countIssuesForVersion = new HashMap<>();
+		HashMap<String, HashMap<String, Long>> countEffortForVersion = new HashMap<>();
 		
 		HashSet<String> versionList = new HashSet<>();
 		
@@ -56,6 +65,7 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 		BufferedReader br = null;
 		String sCurrentLine;
 
+		/*
 		br = new BufferedReader(new FileReader(commit_freq));
 		// don't care the first line
 		sCurrentLine = br.readLine();
@@ -77,7 +87,7 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 //			}
 		}
 		if (br != null)br.close();
-		
+		*/
 		
 		JSONParser parser = new JSONParser();
 		JSONArray issues = (JSONArray) parser.parse(new FileReader(issue_json));
@@ -86,7 +96,9 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 			JSONObject issue = (JSONObject) issues.get(i);
 			boolean isSmell = false;		
 			String affectedVersion = (String) issue.get("affect");
+			Long fixingTime = (Long) issue.get("time");
 			versionList.add(affectedVersion);
+			HashSet<String> involvedFiles = new HashSet<>();
 			boolean isSmellIssues = false;
 			
 			Integer c = countIssuesForVersion.get(affectedVersion);
@@ -113,6 +125,7 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 					if (isSmell){
 						String filename = (String) file.get("filename");
 						if (filename.endsWith("java")){
+							involvedFiles.add(filename);
 							Integer counter = countCommitsForSmelly.get(filename);
 							if (counter == null)
 								counter = 1;
@@ -130,6 +143,7 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 							countVersioin++;
 							affectedVersions.put(affectedVersion, countVersioin);
 							countAffectedVersions.put(filename, affectedVersions);
+
 						}
 					}
 					else
@@ -144,9 +158,33 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 									counter ++;
 								countCommitsForNonSmelly.put(filename, counter);
 //							}
+							
+								//keep track non smelly files and their affected versions
+							HashMap affectedVersions = countAffectedVersionsNonSmelly.get(filename);
+							if (affectedVersions == null)
+								affectedVersions = new HashMap<>();
+							Integer countVersioin = (Integer) affectedVersions.get(affectedVersion);
+							if (countVersioin == null)
+								countVersioin = 0;
+							countVersioin++;
+							affectedVersions.put(affectedVersion, countVersioin);
+							countAffectedVersionsNonSmelly.put(filename, affectedVersions);
 						}
 					}
 				}
+			}
+			
+			//Update fixing time
+			for (String filename : involvedFiles){
+				HashMap<String, Long> fixingPerVersion = countEffortForVersion.get(filename);
+				if (fixingPerVersion == null)
+					fixingPerVersion = new HashMap<>();
+				Long totalfixingtime = fixingPerVersion.get(affectedVersion);
+				if (totalfixingtime == null)
+					totalfixingtime = (long) 0;
+				totalfixingtime += fixingTime;
+				fixingPerVersion.put(affectedVersion, totalfixingtime);
+				countEffortForVersion.put(filename, fixingPerVersion);
 			}
 			
 			
@@ -169,10 +207,9 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 		}
 	
 		// Count percentage
-		
 		ArrayList<String> sortList = new ArrayList<>(versionList);
 		Collections.sort(sortList);
-		/*
+		
 		for (String version: sortList){
 			System.out.print(version+ ",") ;
 			
@@ -194,7 +231,7 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 				System.out.println((float)nsm/total + ",");
 			}
 		}
-		*/
+		
 		
 		//
 		System.out.println("Count Long lived file******************************");
@@ -204,7 +241,7 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 		}
 		System.out.println();
 		for (String file : countAffectedVersions.keySet()){
-			if (countAffectedVersions.get(file).keySet().size() > 20){
+			if (countAffectedVersions.get(file).keySet().size() > 25){ //for hadoop is 20, struts is 7
 				System.out.print(file + ",");// + countAffectedVersions.get(file).size());
 				for (String v: sortList){
 					Integer num = countAffectedVersions.get(file).get(v);
@@ -215,11 +252,66 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 				System.out.println();
 			}
 		}
-		System.out.print("All version,");
+		System.out.print("All issues of version,");
 		for (String v: sortList){
 			System.out.print(countIssuesForVersion.get(v)+ ",");
 		}
 		System.out.println();
+		
+		//
+		System.out.println("Count Long lived non-smelly file******************************");
+		System.out.print("File name,");
+		for (String v: sortList){
+			System.out.print(v+ ",");
+		}
+		System.out.println();
+		for (String file : countAffectedVersionsNonSmelly.keySet()){
+			if (countAffectedVersionsNonSmelly.get(file).keySet().size() > 1){ //for hadoop is 20, struts is 7
+				System.out.print(file + ",");// + countAffectedVersions.get(file).size());
+				for (String v: sortList){
+					Integer num = countAffectedVersionsNonSmelly.get(file).get(v);
+					if ( num == null)
+						num = 0;
+					System.out.print(num + ",");
+				}
+				System.out.println();
+			}
+		}
+//		System.out.print("All version,");
+//		for (String v: sortList){
+//			System.out.print(countIssuesForVersion.get(v)+ ",");
+//		}
+//		System.out.println();
+		
+		//
+		System.out.println("Count Long lived file effort******************************");
+		System.out.print("File name,");
+		for (String v: sortList){
+			System.out.print(v+ ",");
+		}
+		System.out.println();
+		for (String file : countAffectedVersions.keySet()){
+			if (countAffectedVersions.get(file).keySet().size() > 25){
+				System.out.print(file + ",");// + countAffectedVersions.get(file).size());
+				for (String v: sortList){
+					// compute average fixing time
+					Long fixingtime = countEffortForVersion.get(file).get(v);
+					Integer num = countAffectedVersions.get(file).get(v);
+					float avg_fix; 
+					if ( num == null)
+						avg_fix = 0;
+					else
+						avg_fix = fixingtime/num;
+					System.out.print(avg_fix + ",");
+				}
+				System.out.println();
+			}
+		}
+//		System.out.print("All version,");
+//		for (String v: sortList){
+//			System.out.print((float) countEffortForVersion.get(key)get(v)/countIssuesForVersion.get(v)+ ",");
+//		}
+//		System.out.println();
 		
 		//count commit freg
 		System.out.print("smell issues,");

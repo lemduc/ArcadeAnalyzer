@@ -19,8 +19,21 @@ import org.json.simple.parser.JSONParser;
 
 public class JSONUtil {
 
-	final static String inputFile = "/Users/felicitia/Google_Drive/Arcade/ICSE_2016_data/yixue_arch_result/class_smell/struts2_pkg.xls";
-	final static String outputFile = "/Users/felicitia/Google_Drive/Arcade/ICSE_2016_data/yixue_arch_result/class_smell_json/struts2_pkg.json";
+//	final static String inputFile = "/Users/felicitia/Google_Drive/Arcade/ICSE_2016_data/yixue_arch_result/class_smell/struts2_pkg.xls";
+//	final static String outputFile = "/Users/felicitia/Google_Drive/Arcade/ICSE_2016_data/yixue_arch_result/class_smell_json/struts2_pkg.json";
+	
+//	final static String inputFile = "F:\\continuum_data\\excel\\pkg_class.xls";
+//	final static String outputFile = "F:\\continuum_data\\excel\\pkg_class_smell.json";
+	
+//	final static String inputFile = "F:\\wicket_data\\excel\\arc_class.xls";
+//	final static String outputFile = "F:\\wicket_data\\excel\\arc_class_smell.json";
+
+	final static String inputFile = "F:\\camel_data\\excel\\arc_class.xls";
+	final static String outputFile = "F:\\camel_data\\excel\\arc_class_smell.json";
+	
+//	final static String inputFile = "F:\\cxf_data\\excel\\arc_class.xls";
+//	final static String outputFile = "F:\\cxf_data\\excel\\arc_class_smell.json";
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

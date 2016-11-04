@@ -81,8 +81,12 @@ public class StringUtil {
 	 */
 	public static String dir2pkg(String dir) {
 		String orgSuffix = extractOrgSuffix(dir);
+		try {
 		String tmp = orgSuffix.substring(0, orgSuffix.lastIndexOf(".java"));
 		return tmp.replace('/', '.');
+		} catch (Exception e){
+			return null;
+		}
 	}
 
 	/**

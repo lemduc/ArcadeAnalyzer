@@ -22,11 +22,45 @@ public class RQ3_CountCommitsRelatedToSmellyFiles {
 	
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
-		String mainFolder = "F:\\USC Google Drive\\Research\\ICSE_2017\\data\\hadoop\\";
+
+// 		Camel
+		String mainFolder = "F:\\camel_data\\";
+		String issue_json = mainFolder + "camel_arc_all_filter.json";
+		String commit_freq = mainFolder + "camel_freq.txt";		
+		
+//		Wicket
+//		String mainFolder = "F:\\camel_data\\";
+//		String issue_json = mainFolder + "camel_pkg_all_filter.json";
+//		String commit_freq = mainFolder + "camel_freq.txt";
+		
+// 		Wicket
+//		String mainFolder = "F:\\wicket_data\\";
+//		String issue_json = mainFolder + "wicket_arc_all_filter.json";
+//		String commit_freq = mainFolder + "wicket_freq.txt";
+		
+// 		Continuum
+//		String mainFolder = "F:\\continuum_data\\";
+//		String issue_json = mainFolder + "continuum_arc_all.json";
+//		String commit_freq = mainFolder + "continuum_freq.txt";
+//		
+// 		cxf
+//		String mainFolder = "F:\\cxf_data\\";
+//		String issue_json = mainFolder + "cxf_arc_all.json";
+//		String commit_freq = mainFolder + "cxf_freq.txt";
+		
+//		Struts
+//		String mainFolder = "F:\\USC Google Drive\\Research\\ICSE_2017\\data\\struts2\\";
+//		String issue_json = mainFolder + "all_smells\\struts2_pkg_all_filter_versions.json";
+//		String commit_freq = mainFolder + "struts2_freq.txt";
+		
+// 		Hadoop	
+//		String mainFolder = "F:\\USC Google Drive\\Research\\ICSE_2017\\data\\hadoop\\";
+//		String issue_json = mainFolder + "all_smells\\hadoop_acdc_all_filter_versions.json";
+//		String commit_freq = mainFolder + "Hadoop_freq.txt";
+		
 //		String issue_json = "F:\\hadoop_data\\hadoop_pkg_full_shorted_removed_dc.json";
-		String issue_json = mainFolder + "all_smells\\hadoop_pkg_all_filter_versions.json";
 //		String commit_freq = "F:\\ASE_2016_data\\Struts2\\struts2_freq.txt";
-		String commit_freq = mainFolder + "Hadoop_freq.txt";
+		
 		
 //		String issue_json = "F:\\ASE_2016_data\\Struts2\\all_smells\\Struts2_pkg_all.json";
 		
@@ -61,8 +95,8 @@ public class RQ3_CountCommitsRelatedToSmellyFiles {
 //				commitFreg.put(match, freg);
 //			}
 		}
-		if (br != null)br.close();
-		
+		if (br != null)
+			br.close();
 		
 		JSONParser parser = new JSONParser();
 		JSONArray issues = (JSONArray) parser.parse(new FileReader(issue_json));
@@ -116,6 +150,7 @@ public class RQ3_CountCommitsRelatedToSmellyFiles {
 		//count commit freg
 		System.out.print("smell issues,");
 		for (String file : countCommitsForSmelly.keySet()){
+			/* only for struts
 			if (file.startsWith("trunk/"))
 				file = file.replace("trunk/", "");
 			if (file.startsWith("branches/STRUTS_2_0_X/"))
@@ -126,6 +161,7 @@ public class RQ3_CountCommitsRelatedToSmellyFiles {
 				file = file.replace("src/hdfs", "src/java");
 			if (file.startsWith("src/core"))
 				file = file.replace("src/core", "src/main/java");
+			*/
 			String fullName = "";
 			for (String s : listFiles){
 				if (s.endsWith(file)) {

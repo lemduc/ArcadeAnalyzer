@@ -17,9 +17,29 @@ import util.StringUtil;
 
 public class MergeInterfaceBasedSmell2Issues {
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
-		String issue_json = "F:\\ASE_2016_data\\Struts2\\dep_con_smells\\struts2_acdc.json";
-		String smell_json = "F:\\ASE_2016_data\\Struts2\\struts2_acdc_interface_smell.csv.json";
-		String merged_output_file = "F:\\ASE_2016_data\\Struts2\\Struts2_acdc_all.json";
+	
+//		String mainFolder = "F:\\camel_data\\";
+//		String issue_json = mainFolder + "camel_arc_dep_con.json";
+//		String smell_json = mainFolder + "camel_arc_interface_smell.csv.json";
+//		String merged_output_file = mainFolder + "camel_arc_all.json";
+		
+		String mainFolder = "F:\\cxf_data\\";
+		String issue_json = mainFolder + "cxf_pkg_dep_con.json";
+		String smell_json = mainFolder + "cxf_pkg_interface_smell.csv.json";
+		String merged_output_file = mainFolder + "cxf_pkg_all.json";
+				
+		
+//		String issue_json = mainFolder + "continuum_data\\continuum_pkg_dep_issue.json";
+//		String smell_json = mainFolder + "continuum_data\\continuum_pkg_interface_smell.csv.json";
+//		String merged_output_file = mainFolder + "continuum_data\\continuum_pkg_all.json";
+		
+//		String issue_json = mainFolder + "wicket_acdc_dep_con.json";
+//		String smell_json = mainFolder + "wicket_acdc_interface_smell.csv.json";
+//		String merged_output_file = mainFolder + "wicket_acdc_all.json";
+				
+//		String issue_json = "F:\\ASE_2016_data\\Struts2\\dep_con_smells\\struts2_acdc.json";
+//		String smell_json = "F:\\ASE_2016_data\\Struts2\\struts2_acdc_interface_smell.csv.json";
+//		String merged_output_file = "F:\\ASE_2016_data\\Struts2\\Struts2_acdc_all.json";
 		
 		
 		JSONParser parser = new JSONParser();

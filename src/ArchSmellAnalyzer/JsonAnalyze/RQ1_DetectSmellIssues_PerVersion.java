@@ -29,14 +29,34 @@ public class RQ1_DetectSmellIssues_PerVersion {
 		HashMap<String, Integer> countBuggyNonSmellyIssue = new HashMap<>();
 		HashMap<String, Integer> countNonSmellyIssue = new HashMap<>();
 		Set<String> allVersionNumber = new HashSet<>();
-		
-//		String issue_json = "F:\\ASE_2016_data\\Hadoop\\all_smells\\hadoop_pkg_all_filter_versions.json";
-//		String merged_output_file = "F:\\ASE_2016_data\\Hadoop\\categorize\\hadoop_pkg_all";
 
-		String main_folder = "F:\\USC Google Drive\\Research\\ICSE_2017\\data\\struts2\\";
+//		Camel 
+		String mainFolder = "F:\\camel_data\\";
+		String issue_json = mainFolder + "camel_arc_all_filter.json";
+		String merged_output_file = mainFolder + "wicket_acdc_all";
 		
-		String issue_json = main_folder + "all_smells\\Struts2_pkg_all.json";
-		String merged_output_file = main_folder + "categorize\\Struts2_pkg_all";
+// 		Wicket
+//		String mainFolder = "F:\\wicket_data\\";
+//		String issue_json = mainFolder + "wicket_arc_all_filter.json";
+//		String merged_output_file = mainFolder + "wicket_acdc_all";
+		
+// 		Continuum
+//		String mainFolder = "F:\\continuum_data\\";
+//		String issue_json = mainFolder + "continuum_pkg_all.json";
+//		String merged_output_file = mainFolder + "continuum_acdc_all";
+		
+		
+// 		cxf
+//		String mainFolder = "F:\\cxf_data\\";
+//		String issue_json = mainFolder + "cxf_arc_all_filter.json";
+//		String merged_output_file = mainFolder + "cxf_arc_all";
+		
+//		String issue_json = "F:\\Google Drive\\Research\\ICSE_2017\\data\\hadoop\\all_smells\\hadoop_acdc_all_filter_versions.json";
+//		String merged_output_file = "F:\\Google Drive\\Research\\ICSE_2017\\data\\hadoop\\categorize\\hadoop_acdc_all";
+
+//		String main_folder = "F:\\Google Drive\\Research\\ICSE_2017\\data\\struts2\\";
+//		String issue_json = main_folder + "all_smells\\Struts2_acdc_all.json";
+//		String merged_output_file = main_folder + "categorize\\Struts2_pkg_all";
 				
 //		String issue_json = "F:\\ASE_2016_data\\Lucene\\all_smells\\Lucene_arc_all.json";
 //		String merged_output_file = "F:\\ASE_2016_data\\Lucene\\categorize\\Lucene_arc_all";
@@ -76,7 +96,7 @@ public class RQ1_DetectSmellIssues_PerVersion {
 				
 		}
 		
-		
+		/* don't need to write to file
 		File json_file = new File(merged_output_file+"_smell.json");
 		// if file doesnt exists, then create it
 		if (!json_file.exists()) {
@@ -96,9 +116,9 @@ public class RQ1_DetectSmellIssues_PerVersion {
 		bw = new BufferedWriter(fw);
 		bw.write(non_smell_issues.toJSONString());
 		bw.close();
-
-		System.out.println("Done");
 		
+		System.out.println("Done");
+		*/
 		
 		//count priority
 		//System.out.println("smell issues");
@@ -132,7 +152,7 @@ public class RQ1_DetectSmellIssues_PerVersion {
 			
 			
 			
-			System.out.printf(s + ", %.2f, ,%.2f\n", percentageSmell, percentageNonSmell);
+			System.out.printf(s + ", %.2f, %.2f\n", percentageSmell, percentageNonSmell);
 		}
 		
 	}
