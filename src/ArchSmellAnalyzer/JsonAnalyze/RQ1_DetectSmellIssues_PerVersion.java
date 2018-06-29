@@ -30,31 +30,41 @@ public class RQ1_DetectSmellIssues_PerVersion {
 		HashMap<String, Integer> countNonSmellyIssue = new HashMap<>();
 		Set<String> allVersionNumber = new HashSet<>();
 
-//		Camel 
-		String mainFolder = "F:\\camel_data\\";
-		String issue_json = mainFolder + "camel_arc_all_filter.json";
-		String merged_output_file = mainFolder + "wicket_acdc_all";
+//	nutch 
+//	String mainFolder = "E:\\nutch_data\\";
+//	String issue_json = mainFolder + "nutch_arc_all_FILTER.json";
+
+//		String mainFolder = "E:\\openjpa_data\\";
+//		String issue_json = mainFolder + "openjpa_pkg_all_filter.json";
 		
+////		Camel 
+//		String mainFolder = "F:\\camel_data\\";
+//		String issue_json = mainFolder + "camel_arc_all_filter.json";
+//		String merged_output_file = mainFolder + "wicket_acdc_all";
+//		
 // 		Wicket
 //		String mainFolder = "F:\\wicket_data\\";
 //		String issue_json = mainFolder + "wicket_arc_all_filter.json";
 //		String merged_output_file = mainFolder + "wicket_acdc_all";
 		
 // 		Continuum
-//		String mainFolder = "F:\\continuum_data\\";
-//		String issue_json = mainFolder + "continuum_pkg_all.json";
+//		String mainFolder = "E:\\continuum_data\\";
+//		String issue_json = mainFolder + "continuum_acdc_all_filter.json";
 //		String merged_output_file = mainFolder + "continuum_acdc_all";
 		
 		
 // 		cxf
-//		String mainFolder = "F:\\cxf_data\\";
-//		String issue_json = mainFolder + "cxf_arc_all_filter.json";
-//		String merged_output_file = mainFolder + "cxf_arc_all";
+//		String mainFolder = "E:\\cxf_data\\";
+//		String issue_json = mainFolder + "cxf_acdc_all.json";
 		
-//		String issue_json = "F:\\Google Drive\\Research\\ICSE_2017\\data\\hadoop\\all_smells\\hadoop_acdc_all_filter_versions.json";
-//		String merged_output_file = "F:\\Google Drive\\Research\\ICSE_2017\\data\\hadoop\\categorize\\hadoop_acdc_all";
+// 		hadoop
+//		String mainFolder = "E:\\hadoop_data\\";
+//		String issue_json = mainFolder + "hadoop_pkg_full_shorted.json";
+		
+		String issue_json = "G:\\My Drive\\Research\\ICSE_2017\\data\\hadoop\\all_smells\\hadoop_acdc_all_filter_versions.json";
+		String merged_output_file = "G:\\My Drive\\Research\\ICSE_2017\\data\\hadoop\\categorize\\hadoop_acdc_all";
 
-//		String main_folder = "F:\\Google Drive\\Research\\ICSE_2017\\data\\struts2\\";
+//		String main_folder = "E:\\USC Google Drive\\Research\\ICSE_2017\\data\\struts2\\";
 //		String issue_json = main_folder + "all_smells\\Struts2_acdc_all.json";
 //		String merged_output_file = main_folder + "categorize\\Struts2_pkg_all";
 				
@@ -68,7 +78,8 @@ public class RQ1_DetectSmellIssues_PerVersion {
 		
 		for (int i = 0; i < issues.size(); i ++){
 			JSONObject issue = (JSONObject) issues.get(i);
-			boolean isSmell = false;		
+			boolean isSmell = false;
+			boolean isCoupling = false;
 			JSONArray commits = (JSONArray) issue.get("commits");
 			
 			commitloop:
@@ -80,14 +91,33 @@ public class RQ1_DetectSmellIssues_PerVersion {
 					JSONObject smells = (JSONObject) file.get("smells");
 					
 					if (smells != null){
+						// this is to test all the
 						isSmell = true;
-						break commitloop;
+//						break commitloop;
+						
+						// this is to test only 2 coupling-smells
+						
+						Object Logical_coupling = smells.get("Logical_Dependency");
+						Object Dup_Function = smells.get("Clone_Comp");  
+						if (Logical_coupling != null || Dup_Function != null) {
+							if (smells.keySet().size() >1){
+								isCoupling = true;
+								break commitloop;
+							}
+						}
+						if (Logical_coupling != null && Dup_Function != null) {
+							if (smells.keySet().size() >2){
+								isCoupling = true;
+								break commitloop;
+							}
+						}
 					}
 				}
 			}
 			
 			if (isSmell)
-				smell_issues.add(issue);
+				if (isCoupling)
+					smell_issues.add(issue);
 			else
 				if (!((String) issue.get("affect")).equals("")){
 					//System.out.println(issue.get("affect"));
@@ -140,13 +170,13 @@ public class RQ1_DetectSmellIssues_PerVersion {
 			
 			Integer tmp = countBuggySmellyIssue.get(s);
 			if (tmp==null)
-				percentageSmell = 0;
+				percentageSmell = -1;
 			else
 				percentageSmell = (float) tmp/countSmellyIssue.get(s);
 			
 			tmp = countBuggyNonSmellyIssue.get(s);
 			if (tmp==null)
-				percentageNonSmell = 0;
+				percentageNonSmell = -1;
 			else
 				percentageNonSmell = (float) tmp/countNonSmellyIssue.get(s);
 			

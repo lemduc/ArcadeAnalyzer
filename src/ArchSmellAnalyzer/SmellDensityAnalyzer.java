@@ -18,6 +18,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 import edu.usc.softarch.arcade.antipattern.detection.Smell;
 import edu.usc.softarch.arcade.antipattern.detection.SmellUtil;
+//import edu.usc.softarch.arcade.antipattern.detection.codesmell.AnalyzeResult.SmellDensityAnalyzer;
 import edu.usc.softarch.arcade.config.Config;
 import edu.usc.softarch.arcade.facts.ConcernCluster;
 import edu.usc.softarch.arcade.facts.driver.ConcernClusterRsf;

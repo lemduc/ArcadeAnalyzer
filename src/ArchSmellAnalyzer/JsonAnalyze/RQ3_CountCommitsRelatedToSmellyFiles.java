@@ -24,9 +24,19 @@ public class RQ3_CountCommitsRelatedToSmellyFiles {
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
 
 // 		Camel
-		String mainFolder = "F:\\camel_data\\";
-		String issue_json = mainFolder + "camel_arc_all_filter.json";
-		String commit_freq = mainFolder + "camel_freq.txt";		
+//		String mainFolder = "F:\\camel_data\\";
+//		String issue_json = mainFolder + "camel_arc_all_filter.json";
+//		String commit_freq = mainFolder + "camel_freq.txt";		
+		
+////		nutch 
+//		String mainFolder = "E:\\nutch_data\\";
+//		String issue_json = mainFolder + "nutch_acdc_all.json";
+//		String commit_freq = mainFolder + "nutch_freq.txt";		
+	
+//		opemjpa 
+		String mainFolder = "E:\\openjpa_data\\";
+		String issue_json = mainFolder + "openjpa_pkg_all.json";
+		String commit_freq = mainFolder + "openjpa_freq.txt";
 		
 //		Wicket
 //		String mainFolder = "F:\\camel_data\\";

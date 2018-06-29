@@ -50,9 +50,19 @@ public class RQ2_CountIssuesRelatedToSmellyFiles {
 //		String issue_json = mainFolder + "wicket_pkg_all_filter.json";
 
 // 		caMEL
-		String mainFolder = "F:\\camel_data\\";
-		String issue_json = mainFolder + "camel_arc_all_filter.json";
+//		String mainFolder = "F:\\camel_data\\";
+//		String issue_json = mainFolder + "camel_arc_all_filter.json";
 		
+//		nutch 
+//		String mainFolder = "E:\\nutch_data\\";
+//		String issue_json = mainFolder + "nutch_pkg_all_filter.json";
+		
+//		openjpa 
+//		String mainFolder = "E:\\openjpa_data\\";
+//		String issue_json = mainFolder + "openjpa_pkg_all_filter.json";
+		
+		String mainFolder = "E:\\lucene_data\\";
+		String issue_json = mainFolder + "lucene_arc_all_filter.json";
 		
 		HashMap<String, Integer> countIssuesForSmelly = new HashMap<>();
 		HashMap<String, Integer> countIssuesForNonSmelly = new HashMap<>();

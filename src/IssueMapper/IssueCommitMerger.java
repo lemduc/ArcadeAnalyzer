@@ -18,12 +18,12 @@ public class IssueCommitMerger {
 		projectName = globalConfig.getValue("project");
 		projectConfig = new Config("config/" + projectName + ".properties");
 
-//		mergeIssue(projectConfig.getValue("ACDC_FILTER"),
-//				projectConfig.getValue("ACDC_MERGE"));
+		mergeIssue(projectConfig.getValue("ACDC_FILTER"),
+				projectConfig.getValue("ACDC_MERGE"));
 		mergeIssue(projectConfig.getValue("ARC_FILTER"),
 				projectConfig.getValue("ARC_MERGE"));
-//		mergeIssue(projectConfig.getValue("PKG_FILTER"),
-//				projectConfig.getValue("PKG_MERGE"));
+		mergeIssue(projectConfig.getValue("PKG_FILTER"),
+				projectConfig.getValue("PKG_MERGE"));
 
 		System.out.println("done!");
 	}

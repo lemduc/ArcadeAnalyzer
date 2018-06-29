@@ -18,17 +18,32 @@ import util.StringUtil;
 public class MergeInterfaceBasedSmell2Issues {
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
 	
+		String mainFolder = "E:\\lucene_data\\";
+		String issue_json = mainFolder + "lucene_acdc_dep_con.json";
+		String smell_json = mainFolder + "lucene_acdc_interface_smell.csv.json";
+		String merged_output_file = mainFolder + "lucene_acdc_all.json";
+		
 //		String mainFolder = "F:\\camel_data\\";
 //		String issue_json = mainFolder + "camel_arc_dep_con.json";
 //		String smell_json = mainFolder + "camel_arc_interface_smell.csv.json";
 //		String merged_output_file = mainFolder + "camel_arc_all.json";
+//		
+//		String mainFolder = "F:\\cxf_data\\";
+//		String issue_json = mainFolder + "cxf_pkg_dep_con.json";
+//		String smell_json = mainFolder + "cxf_pkg_interface_smell.csv.json";
+//		String merged_output_file = mainFolder + "cxf_pkg_all.json";
+//				
 		
-		String mainFolder = "F:\\cxf_data\\";
-		String issue_json = mainFolder + "cxf_pkg_dep_con.json";
-		String smell_json = mainFolder + "cxf_pkg_interface_smell.csv.json";
-		String merged_output_file = mainFolder + "cxf_pkg_all.json";
-				
+//		String mainFolder = "E:\\nutch_data\\";
+//		String issue_json = mainFolder + "nutch_acdc_dep_con.json";
+//		String smell_json = mainFolder + "nutch_acdc_interface_smell.csv.json";
+//		String merged_output_file = mainFolder + "nutch_acdc_all.json";
 		
+//		String mainFolder = "E:\\openjpa_data\\";
+//		String issue_json = mainFolder + "openjpa_pkg_dep_con.json";
+//		String smell_json = mainFolder + "openjpa_pkg_interface_smell.csv.json";
+//		String merged_output_file = mainFolder + "openjpa_pkg_all.json";
+						
 //		String issue_json = mainFolder + "continuum_data\\continuum_pkg_dep_issue.json";
 //		String smell_json = mainFolder + "continuum_data\\continuum_pkg_interface_smell.csv.json";
 //		String merged_output_file = mainFolder + "continuum_data\\continuum_pkg_all.json";

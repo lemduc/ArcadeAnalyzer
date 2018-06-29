@@ -19,9 +19,9 @@ import edu.usc.softarch.arcade.util.FileListing;
 
 public class SmellSummary {
 
-	static String summaryDirectory = "F:\\output\\";
-	static String inputDirectory = "F:\\Google Drive\\ARC_Results\\jackrabbit_ARC_java_2015-08-12_07_37_56_978\\ser";
-
+	static String summaryDirectory = "E:\\output\\";
+	//static String inputDirectory = "F:\\Google Drive\\ARC_Results\\jackrabbit_ARC_java_2015-08-12_07_37_56_978\\ser";
+	static String inputDirectory = "E:\\cxf_data\\arc\\ser"; 
 	public static void main(String[] args) {
 
 		List<File> summaryFiles = getFiles(summaryDirectory);

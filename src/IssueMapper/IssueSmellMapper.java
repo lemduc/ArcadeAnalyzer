@@ -28,18 +28,18 @@ public class IssueSmellMapper {
 		
 			issues = (JSONArray) JSONUtil
 					.readJsonFromFile(projectConfig.getValue("ISSUE_FILE"));
-//			smells = (JSONArray) JSONUtil
-//					.readJsonFromFile(projectConfig.getValue("SMELL_PKG"));
-//			addSmess2All();
-//			JSONUtil.writeJSONArray2File(issues, projectConfig.getValue("DEP_CON_PKG"));
+			smells = (JSONArray) JSONUtil
+					.readJsonFromFile(projectConfig.getValue("SMELL_PKG"));
+			addSmess2All();
+			JSONUtil.writeJSONArray2File(issues, projectConfig.getValue("DEP_CON_PKG"));
 			smells = (JSONArray) JSONUtil
 					.readJsonFromFile(projectConfig.getValue("SMELL_ARC"));
 			addSmess2All();
 			JSONUtil.writeJSONArray2File(issues, projectConfig.getValue("DEP_CON_ARC"));
-//			smells = (JSONArray) JSONUtil
-//					.readJsonFromFile(projectConfig.getValue("SMELL_ACDC"));
-//			addSmess2All();
-//			JSONUtil.writeJSONArray2File(issues, projectConfig.getValue("DEP_CON_ACDC"));
+			smells = (JSONArray) JSONUtil
+					.readJsonFromFile(projectConfig.getValue("SMELL_ACDC"));
+			addSmess2All();
+			JSONUtil.writeJSONArray2File(issues, projectConfig.getValue("DEP_CON_ACDC"));
 		 StringUtil.printStringSet(getDirectoryPrefix());
 		System.out.println("done! (๑•ᴗ•๑)♡‼");
 	}

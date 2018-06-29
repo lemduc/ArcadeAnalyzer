@@ -19,6 +19,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import edu.usc.softarch.arcade.antipattern.detection.Smell;
 import edu.usc.softarch.arcade.antipattern.detection.SmellUtil;
+//import edu.usc.softarch.arcade.antipattern.detection.codesmell.AnalyzeResult.SmellCount;
 import edu.usc.softarch.arcade.facts.ConcernCluster;
 import edu.usc.softarch.arcade.util.FileListing;
 import edu.usc.softarch.arcade.util.FileUtil;
@@ -28,12 +29,28 @@ public class SmellAnylazer {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+//		String inputDirectory = "E:\\ser_1";
+		
+		String inputDirectory = "E:\\Android_Framework_dex\\recovered\\arc\\sers";
+		String outputDirectory = "E:\\Android_Framework_dex\\recovered\\arc\\acdc_comp";
+		
 //		String inputDirectory = "F:\\cxf_data\\arc\\ser";
 //		String outputDirectory = "F:\\cxf_data\\excel\\arc_class";
 		
-		String inputDirectory = "F:\\camel_data\\arc\\ser";
-		String outputDirectory = "F:\\camel_data\\excel\\arc_class";
-//		
+//		String inputDirectory = "E:\\android\\ser";
+//		String outputDirectory = "E:\\android\\excel\\acdc_comp";
+		
+//		String inputDirectory = "F:\\ivy_data\\ivy_acdc\\ser";
+//		String outputDirectory = "F:\\ivy_data\\excel\\acdc_class";
+	
+//		String inputDirectory = "E:\\openjpa_data\\acdc\\ser";
+//		String outputDirectory = "E:\\openjpa_data\\excel\\pkg_class";		
+		
+//		String inputDirectory = "E:\\nutch_data\\pkg\\ser";
+//		String outputDirectory = "E:\\nutch_data\\excel\\pkg_class";
+		
+//		String inputDirectory = "E:\\lucene_data\\acdc\\ser";
+//		String outputDirectory = "E:\\lucene_data\\excel\\acdc_class";
 		
 		//		String inputDirectory = "F:\\continuum_data\\pkg\\ser";
 //		String outputDirectory = "F:\\continuum_data\\excel\\pkg_class";
@@ -52,8 +69,8 @@ public class SmellAnylazer {
 		
 		Set<File> orderedSerFiles = getOrderedFiles(inputDirectory+"/");
 		analyzeClassSmellnum(orderedSerFiles, outputDirectory);// "/Users/felicitia/Desktop/"+outputFileName);
-//		analyzeVersionSmellnum(orderedSerFiles, "/Users/felicitia/Documents/Research/Arch_Decay/result/arch_smell/"+outputFileName+".csv");
-//		analyzeCompSmellnum(orderedSerFiles, "/Users/felicitia/Documents/Research/Arch_Decay/result/comp_smell/"+outputFileName);
+		analyzeVersionSmellnum(orderedSerFiles, "E:\\output\\all.csv");
+//		analyzeCompSmellnum(orderedSerFiles, outputDirectory); //"/Users/felicitia/Documents/Research/Arch_Decay/result/comp_smell/"+outputFileName);
 	}
 
 	/**
@@ -64,6 +81,7 @@ public class SmellAnylazer {
 	 */
 	static void analyzeVersionSmellnum(Set<File> inputFiles, String outputPath){
 		PrintWriter writer = null;
+		Integer total = 0;
 		try {
 			writer = new PrintWriter(outputPath);
 		} catch (FileNotFoundException e) {
@@ -93,10 +111,12 @@ public class SmellAnylazer {
 						+ smell);
 			}
 			int sumCount = buoCount + bdcCount + spfCount + bcoCount;
+			total += sumCount;
 			writer.println(FileUtil.extractVersionPretty(file.getName()) + ","
 					+ bdcCount + "," + buoCount + "," + bcoCount + ","
 					+ spfCount + "," + sumCount);
 		}
+		writer.println("total:" + total);
 		writer.close();
 	}
 	
@@ -109,7 +129,7 @@ public class SmellAnylazer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		fileList = FileUtil.sortFileListByVersion(fileList);
+//		fileList = FileUtil.sortFileListByVersion(fileList);
 
 		for (File file : fileList) {
 			if (file.getName().endsWith(".ser")) {

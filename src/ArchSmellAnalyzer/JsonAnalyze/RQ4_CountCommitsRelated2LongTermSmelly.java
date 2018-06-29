@@ -30,17 +30,21 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
 
+//		String mainFolder = "E:\\data\\";
 //		String issue_json = mainFolder + "struts2\\all_smells\\struts2_acdc_all_filter_versions.json";
 //		String commit_freq = mainFolder + "struts2\\struts2_freq.txt";
 		
-//		String mainFolder = "F:\\USC Google Drive\\Research\\ICSE_2017\\data\\";
-//		String issue_json = mainFolder + "hadoop\\all_smells\\hadoop_pkg_all_filter_versions.json";
+		String mainFolder = "E:\\data\\";
+		String issue_json = mainFolder + "hadoop\\all_smells\\hadoop_pkg_all_filter_versions.json";
 //   		String commit_freq = mainFolder + "hadoop\\Hadoop_freq.txt";
    		
 //   		Wicket
-		String mainFolder = "F:\\wicket_data\\";
-		String issue_json = mainFolder + "wicket_pkg_all_filter.json";
+//		String mainFolder = "F:\\wicket_data\\";
+//		String issue_json = mainFolder + "wicket_pkg_all_filter.json";
 
+// 		Camel
+//		String mainFolder = "E:\\camel_data\\";
+//		String issue_json = mainFolder + "camel_arc_all_filter.json";
 		
 //		String issue_json = "F:\\ASE_2016_data\\Struts2\\all_smells\\Struts2_pkg_all.json";
    		
@@ -232,6 +236,24 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 			}
 		}
 		
+		Collections.sort(sortList);
+		
+		for (String version: sortList){
+			System.out.print(version+ ",") ;
+			
+			Integer sm;
+			Integer nsm;
+		
+			
+			sm = countIssuesForSmelly.get(version);
+			if (sm == null)
+				sm = 0;
+			nsm = countIssuesForNonSmelly.get(version);
+			if (nsm == null)
+				nsm = 0;
+			
+			System.out.println(sm + ",");
+		}
 		
 		//
 		System.out.println("Count Long lived file******************************");
@@ -241,7 +263,7 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 		}
 		System.out.println();
 		for (String file : countAffectedVersions.keySet()){
-			if (countAffectedVersions.get(file).keySet().size() > 25){ //for hadoop is 20, struts is 7
+			if (countAffectedVersions.get(file).keySet().size() > 7){ //for hadoop is 20, struts is 7
 				System.out.print(file + ",");// + countAffectedVersions.get(file).size());
 				for (String v: sortList){
 					Integer num = countAffectedVersions.get(file).get(v);
@@ -266,7 +288,7 @@ public class RQ4_CountCommitsRelated2LongTermSmelly {
 		}
 		System.out.println();
 		for (String file : countAffectedVersionsNonSmelly.keySet()){
-			if (countAffectedVersionsNonSmelly.get(file).keySet().size() > 1){ //for hadoop is 20, struts is 7
+			if (countAffectedVersionsNonSmelly.get(file).keySet().size() > 7){ //for hadoop is 20, struts is 7
 				System.out.print(file + ",");// + countAffectedVersions.get(file).size());
 				for (String v: sortList){
 					Integer num = countAffectedVersionsNonSmelly.get(file).get(v);

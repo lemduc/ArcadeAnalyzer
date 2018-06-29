@@ -28,12 +28,30 @@ public class JSONUtil {
 //	final static String inputFile = "F:\\wicket_data\\excel\\arc_class.xls";
 //	final static String outputFile = "F:\\wicket_data\\excel\\arc_class_smell.json";
 
-	final static String inputFile = "F:\\camel_data\\excel\\arc_class.xls";
-	final static String outputFile = "F:\\camel_data\\excel\\arc_class_smell.json";
+//	final static String inputFile = "F:\\camel_data\\excel\\arc_class.xls";
+//	final static String outputFile = "F:\\camel_data\\excel\\arc_class_smell.json";
+	
+//	final static String inputFile = "E:\\nutch_data\\excel\\pkg_class.xls";
+//	final static String outputFile = "E:\\nutch_data\\excel\\pkg_class_smell.json";
 	
 //	final static String inputFile = "F:\\cxf_data\\excel\\arc_class.xls";
 //	final static String outputFile = "F:\\cxf_data\\excel\\arc_class_smell.json";
 	
+//	final static String inputFile = "F:\\ivy_data\\excel\\acdc_class.xls";
+//	final static String outputFile = "F:\\ivy_data\\excel\\acdc_class_smell.json";
+	
+//	final static String inputFile = "E:\\openjpa_data\\excel\\acdc_class.xls";
+//	final static String outputFile = "E:\\openjpa_data\\excel\\acdc_class_smell.json";
+	
+//	final static String inputFile = "E:\\lucene_data\\excel\\pkg_class.xls";
+//	final static String outputFile = "E:\\lucene_data\\excel\\pkg_class_smell.json";
+	
+	final static String inputFile = "E:\\android\\excel\\acdc_comp.xls";
+	final static String outputFile = "E:\\android\\excel\\acdc_comp.json";
+
+	
+//	final static String inputFile = "F:\\activemq_data\\excel\\pkg_class.xls";
+//	final static String outputFile = "F:\\activemq_data\\excel\\pkg_class_smell.json";
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -98,6 +116,20 @@ public class JSONUtil {
 			writer.close();
 		}
 	}
+	
+	public static void writeJSONObject2File(JSONObject obj, final String jsonFile){
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(jsonFile, "UTF-8");
+			writer.println(obj.toJSONString());
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			writer.close();
+		}
+	}
+	
 	
 	/**
 	 * 
