@@ -18,10 +18,15 @@ import util.StringUtil;
 public class MergeInterfaceBasedSmell2Issues {
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
 	
-		String mainFolder = "E:\\lucene_data\\";
-		String issue_json = mainFolder + "lucene_acdc_dep_con.json";
-		String smell_json = mainFolder + "lucene_acdc_interface_smell.csv.json";
-		String merged_output_file = mainFolder + "lucene_acdc_all.json";
+//		String mainFolder = "E:\\lucene_data\\";
+//		String issue_json = mainFolder + "lucene_acdc_dep_con.json";
+//		String smell_json = mainFolder + "lucene_acdc_interface_smell.csv.json";
+//		String merged_output_file = mainFolder + "lucene_acdc_all.json";
+	
+		String mainFolder = "E:\\ignite_data\\";
+		String issue_json = mainFolder + "ignite_acdc_dep_con.json";
+		String smell_json = mainFolder + "ignite_acdc_interface_smell.csv.json";
+		String merged_output_file = mainFolder + "ignite_acdc_all.json";
 		
 //		String mainFolder = "F:\\camel_data\\";
 //		String issue_json = mainFolder + "camel_arc_dep_con.json";
@@ -64,6 +69,8 @@ public class MergeInterfaceBasedSmell2Issues {
 		for (int i = 0; i < issues.size(); i ++){
 			JSONObject issue = (JSONObject) issues.get(i);
 			String afffect_version = (String) issue.get("affect");
+			afffect_version = StringUtil.formatIssueVersion(afffect_version);
+			
 			
 			JSONArray commits = (JSONArray) issue.get("commits");
 			for (int j = 0; j < commits.size(); j++){
@@ -77,10 +84,12 @@ public class MergeInterfaceBasedSmell2Issues {
 //						System.out.println(filename);
 						String orgFormat = StringUtil.dir2pkg(filename);
 						if (orgFormat != null) {
-							// System.out.println(orgFormat);
+//							 System.out.println(orgFormat);
 							// try to map smell
 							JSONObject smell_of_a_version = (JSONObject) smell.get(afffect_version);
+							System.out.println(afffect_version);
 							if (smell_of_a_version != null){
+//								System.out.println("has smell");
 								JSONObject smell_of_a_file = (JSONObject) smell_of_a_version.get(orgFormat);
 								if (smell_of_a_file != null)
 								{

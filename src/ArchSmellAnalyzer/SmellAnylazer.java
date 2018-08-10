@@ -31,14 +31,17 @@ public class SmellAnylazer {
 
 //		String inputDirectory = "E:\\ser_1";
 		
-		String inputDirectory = "E:\\Android_Framework_dex\\recovered\\arc\\sers";
-		String outputDirectory = "E:\\Android_Framework_dex\\recovered\\arc\\acdc_comp";
+//		String inputDirectory = "E:\\Android_Framework_dex\\recovered\\arc\\sers";
+//		String outputDirectory = "E:\\Android_Framework_dex\\recovered\\arc\\acdc_comp";
 		
 //		String inputDirectory = "F:\\cxf_data\\arc\\ser";
 //		String outputDirectory = "F:\\cxf_data\\excel\\arc_class";
 		
 //		String inputDirectory = "E:\\android\\ser";
 //		String outputDirectory = "E:\\android\\excel\\acdc_comp";
+		
+		String inputDirectory = "E:\\ignite_data\\pkg\\ser";
+		String outputDirectory = "E:\\ignite_data\\excel\\pkg_class";
 		
 //		String inputDirectory = "F:\\ivy_data\\ivy_acdc\\ser";
 //		String outputDirectory = "F:\\ivy_data\\excel\\acdc_class";

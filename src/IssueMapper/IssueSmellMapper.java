@@ -83,10 +83,13 @@ public class IssueSmellMapper {
 			return;
 		}
 		version = StringUtil.formatIssueVersion(version);
+	
+		
 		String extractedName = StringUtil.dir2pkg(dir);
 		for (int i = 0; i < smells.size(); i++) {
 			JSONObject smell = (JSONObject) smells.get(i);
-			if (version.equals(smell.get("version"))) {
+			if (version.equals(StringUtil.formatIssueVersion((String) smell.get("version")))) {
+				System.out.println("has smell");
 				JSONArray smellsPerVersion = (JSONArray) smell.get("smells");
 				for (int j = 0; j < smellsPerVersion.size(); j++) {
 					JSONObject smellPerVersion = (JSONObject) smellsPerVersion

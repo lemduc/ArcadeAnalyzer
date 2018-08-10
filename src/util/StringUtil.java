@@ -91,7 +91,7 @@ public class StringUtil {
 
 	/**
 	 * if the version is 1.1.1.1, then change it to 1.1.1, only keep 3 numbers
-	 * 
+	 * if the version is 1.1, then change it to 1.1.0, keep 3 numbers
 	 * @param version
 	 * @return
 	 */
@@ -107,6 +107,16 @@ public class StringUtil {
 				return m.group(0);
 			}
 		}
+		
+		p = Pattern
+				.compile("((\\d)+\\.){1}(\\d)+");
+		m = p.matcher(version);
+		if (m.find()) {
+			String tmp = m.group(0);
+			return tmp + ".0";
+		}
+		
 		return version;
 	}
+	
 }

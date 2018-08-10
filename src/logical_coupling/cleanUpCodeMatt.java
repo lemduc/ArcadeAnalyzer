@@ -27,9 +27,9 @@ public class cleanUpCodeMatt {
 
 	private static void single(String sourceFile, String folder) {
 		
-		String targetFile = folder + "\\" + sourceFile.split("\\.")[0] + "_clean.csv";
+		String targetFile = folder + File.separator + sourceFile.split("\\.")[0] + "_clean.csv";
 		String output;
-		try (BufferedReader br = new BufferedReader(new FileReader(folder + "\\" + sourceFile)))
+		try (BufferedReader br = new BufferedReader(new FileReader(folder + File.separator + sourceFile)))
 		{
 			String sCurrentLine;
 			// skip the first line
@@ -56,12 +56,26 @@ public class cleanUpCodeMatt {
 	
 	private static String convertFile(String javaName){
 		String output = javaName;
-		try {
-			output = "org.apache." + output.split("java\\/org\\/apache\\/")[1].replace("/", ".").replace(".java", "");
-		} catch (Exception e) {
-//			e.printStackTrace();
-			return null;
-		}
+		System.out.println(javaName);
+		
+//		if (javaName.contains("java\\/org\\/apache\\/"))
+//			output = "org.apache." + output.split("java\\/org\\/apache\\/")[1].replace("/", ".").replace(".java", "");
+//		else if (javaName.contains("java\\/main\\/org\\/apache\\/"))
+//			output = "org.apache." + output.split("java\\/main\\/org\\/apache\\/")[1].replace("/", ".").replace(".java", "");
+//		else if (javaName.contains("java\\/test\\/org\\/apache\\/"))
+//			output = "org.apache." + output.split("java\\/test\\/org\\/apache\\/")[1].replace("/", ".").replace(".java", "");
+//		else
+//			return null;
+		
+		if (javaName.contains("java/org/apache/"))
+		output = "org.apache." + output.split("java/org/apache/")[1].replace("/", ".").replace(".java", "");
+	else if (javaName.contains("java/main/org/apache/"))
+		output = "org.apache." + output.split("java/main/org/apache/")[1].replace("/", ".").replace(".java", "");
+	else if (javaName.contains("java/test/org/apache/"))
+		output = "org.apache." + output.split("java/test/org/apache/")[1].replace("/", ".").replace(".java", "");
+	else
+		return null;
+		
 		return output;
 	}
 	
