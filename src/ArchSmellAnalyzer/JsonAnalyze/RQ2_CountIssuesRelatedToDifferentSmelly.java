@@ -47,7 +47,19 @@ public class RQ2_CountIssuesRelatedToDifferentSmelly {
 //		String mainFolder = "E:\\nutch_data\\";
 //		String issue_json = mainFolder + "nutch_pkg_all.json";
 //		String commit_freq = mainFolder + "nutch_freq.txt";
+		
+// 		nutch
+//		String mainFolder = "E:\\ignite_data\\";
+//		String issue_json = mainFolder + "ignite_arc_all.json";
+//		String commit_freq = mainFolder + "ignite_freq.txt";
 
+		String mainFolder = "E:\\pig_data\\";
+		String issue_json = mainFolder + "pig_acdc_all.json";
+		String commit_freq = mainFolder + "pig_freq.txt";
+
+//		String mainFolder = "E:\\zookeeper_data\\";
+//		String issue_json = mainFolder + "zookeeper_acdc_all.json";
+//		String commit_freq = mainFolder + "zookeeper_freq.txt";
 		
 // 		openjpa
 //		String mainFolder = "E:\\openjpa_data\\";
@@ -67,9 +79,9 @@ public class RQ2_CountIssuesRelatedToDifferentSmelly {
 //		String commit_freq = mainFolder + "struts2_freq.txt";
 		
 // 		Hadoop	
-		String mainFolder = "G:\\My Drive\\Research\\ICSE_2017\\data\\hadoop\\";
-		String issue_json = mainFolder + "all_smells\\hadoop_arc_all_filter_versions.json";
-		String commit_freq = mainFolder + "hadoop_freq.txt";
+//		String mainFolder = "G:\\My Drive\\Research\\ICSE_2017\\data\\hadoop\\";
+//		String issue_json = mainFolder + "all_smells\\hadoop_arc_all_filter_versions.json";
+//		String commit_freq = mainFolder + "hadoop_freq.txt";
 		
 //		String issue_json = "F:\\hadoop_data\\hadoop_pkg_full_shorted_removed_dc.json";
 //		String issue_json = "F:\\ASE_2016_data\\Struts2\\all_smells\\Struts2_pkg_all.json";
@@ -374,8 +386,8 @@ public class RQ2_CountIssuesRelatedToDifferentSmelly {
 		}
 		System.out.print("change_freq,");
 		System.out.print("prioprity,");
-		System.out.println("type,");
-		System.out.println("time,");
+		System.out.print("type,");
+//		System.out.print("time,");
 		System.out.println("name");
 		
 		for (String file : countIssuesForSmelly.keySet()){
@@ -388,7 +400,8 @@ public class RQ2_CountIssuesRelatedToDifferentSmelly {
 			System.out.print(priorityMap.get(file ) + ',');
 			System.out.print(typeMap.get(file) + ',');
 //			System.out.print(getCleanedFileName(file) + ",");
-			System.out.println(file);
+//			System.out.println(file);
+			System.out.println();
 		}
 		
 	}
