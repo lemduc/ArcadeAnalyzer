@@ -23,10 +23,16 @@ public class MergeInterfaceBasedSmell2Issues {
 //		String smell_json = mainFolder + "lucene_acdc_interface_smell.csv.json";
 //		String merged_output_file = mainFolder + "lucene_acdc_all.json";
 	
-		String mainFolder = "E:\\ignite_data\\";
-		String issue_json = mainFolder + "ignite_acdc_dep_con.json";
-		String smell_json = mainFolder + "ignite_acdc_interface_smell.csv.json";
-		String merged_output_file = mainFolder + "ignite_acdc_all.json";
+//		String mainFolder = "E:\\ignite_data\\";
+//		String issue_json = mainFolder + "ignite_acdc_dep_con.json";
+//		String smell_json = mainFolder + "ignite_acdc_interface_smell.csv.json";
+//		String merged_output_file = mainFolder + "ignite_acdc_all.json";
+		
+		String mainFolder = "E:\\storm_data\\";
+		String issue_json = mainFolder + "storm_arc_dep_con.json";
+		String smell_json = mainFolder + "storm_arc_interface_smell.csv.json";
+		String merged_output_file = mainFolder + "storm_arc_all.json";
+		
 		
 //		String mainFolder = "F:\\camel_data\\";
 //		String issue_json = mainFolder + "camel_arc_dep_con.json";

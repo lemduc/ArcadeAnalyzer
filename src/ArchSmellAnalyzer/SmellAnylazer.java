@@ -40,8 +40,11 @@ public class SmellAnylazer {
 //		String inputDirectory = "E:\\android\\ser";
 //		String outputDirectory = "E:\\android\\excel\\acdc_comp";
 		
-		String inputDirectory = "E:\\ignite_data\\pkg\\ser";
-		String outputDirectory = "E:\\ignite_data\\excel\\pkg_class";
+//		String inputDirectory = "E:\\ignite_data\\pkg\\ser";
+//		String outputDirectory = "E:\\ignite_data\\excel\\pkg_class";
+		
+		String inputDirectory = "E:\\storm_data\\pkg\\ser";
+		String outputDirectory = "E:\\storm_data\\excel\\pkg_class";
 		
 //		String inputDirectory = "F:\\ivy_data\\ivy_acdc\\ser";
 //		String outputDirectory = "F:\\ivy_data\\excel\\acdc_class";

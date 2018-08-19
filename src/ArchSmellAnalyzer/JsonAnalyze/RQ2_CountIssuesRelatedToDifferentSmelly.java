@@ -53,9 +53,9 @@ public class RQ2_CountIssuesRelatedToDifferentSmelly {
 //		String issue_json = mainFolder + "ignite_arc_all.json";
 //		String commit_freq = mainFolder + "ignite_freq.txt";
 
-		String mainFolder = "E:\\pig_data\\";
-		String issue_json = mainFolder + "pig_acdc_all.json";
-		String commit_freq = mainFolder + "pig_freq.txt";
+		String mainFolder = "E:\\storm_data\\";
+		String issue_json = mainFolder + "storm_acdc_all.json";
+		String commit_freq = mainFolder + "storm_freq.txt";
 
 //		String mainFolder = "E:\\zookeeper_data\\";
 //		String issue_json = mainFolder + "zookeeper_acdc_all.json";

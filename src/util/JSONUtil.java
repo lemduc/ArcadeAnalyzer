@@ -49,9 +49,12 @@ public class JSONUtil {
 //	final static String inputFile = "E:\\android\\excel\\acdc_comp.xls";
 //	final static String outputFile = "E:\\android\\excel\\acdc_comp.json";
 
-	final static String inputFile = "E:\\ignite_data\\excel\\pkg_class.xls";
-	final static String outputFile = "E:\\ignite_data\\excel\\pkg_class.json";
+//	final static String inputFile = "E:\\ignite_data\\excel\\pkg_class.xls";
+//	final static String outputFile = "E:\\ignite_data\\excel\\pkg_class.json";
 
+	
+	final static String inputFile = "E:\\storm_data\\excel\\acdc_class.xls";
+	final static String outputFile = "E:\\storm_data\\excel\\acdc_class.json";
 	
 //	final static String inputFile = "F:\\activemq_data\\excel\\pkg_class.xls";
 //	final static String outputFile = "F:\\activemq_data\\excel\\pkg_class_smell.json";
